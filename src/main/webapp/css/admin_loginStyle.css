@@ -1,0 +1,101 @@
+html{
+    width: 100vw;
+    height: 100vh;
+}
+
+body{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    background-image: url(../img/admin_bg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+
+.loginView{
+    width: 800px;
+    height: 586px;
+    /*background-color: #9a9afb;*/
+    position: absolute;
+    left: 50%;
+    margin-left: -400px;
+    top: 50%;
+    margin-top: -293px;
+}
+
+.loginView .logoimg{
+    width: 317px;
+    height: 203px;
+    margin: 0 auto;
+    background-image: url(../img/admin_logo.png);
+    background-size: 317px 203px;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.loginView .inputView{
+    width: 100%;
+    margin-top: 50px;
+    display: flex;
+}
+.loginView .inputView .textField{
+    width: calc(50% - 20px);
+    height: 44px;
+    margin-left: 10px;
+    margin-right: 10px;
+    display: inline-block;
+    background-color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 15px;
+}
+
+.loginView .loginButton{
+    width: 260px;
+    height: 44px;
+    color: white;
+    letter-spacing: 3px;
+    background-color: #28b9c9;
+    border-radius: 5px;
+    line-height: 44px;
+    text-align: center;
+    margin: 60px auto 0 auto;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.loginView .gotoRegisterButton{
+    width: 50px;
+    height: 30px;
+    line-height: 30px;
+    cursor: pointer;
+    font-size: 10px;
+    color: #b2b2b3;
+    text-align: center;
+    margin: 20px auto 0 auto;
+}
+
+#registerContent{
+    display: none;
+}
+
+.registCodeView{
+    width: 110px;
+    height: 50px;
+    /*background-color: red;*/
+    margin-right: 10px;
+}
+
+.registCodeView .registCodeButton{
+    width: 100px;
+    height: 50px;
+    background-color: #28b9c9;
+    border-radius: 5px;
+    line-height: 50px;
+    cursor: pointer;
+    color: white;
+    text-align: center;
+    font-size: 14px;
+}

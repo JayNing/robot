@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+scan：当此属性设置为true时，配置文件如果发生改变，将会被重新加载，默认值为true。
+scanPeriod：设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒当scan为true时，此属性生效。默认的时间间隔为1分钟。
+debug：当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。
+-->
+<configuration scan="true" scanPeriod="60 seconds" debug="true">
+    <!-- 定义日志的根目录 -->
+   <property name="LOG_HOME" value="${user.home}/tomcat-robot" />
+    <!-- 定义日志文件名称 -->
+  
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <Encoding>UTF-8</Encoding>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>  
+        </layout>
+    </appender>
+		   
+    <appender name="infoAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Encoding>UTF-8</Encoding>
+        <file>${LOG_HOME}/logs/info.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+           <fileNamePattern>${LOG_HOME}/logs/info-%d{yyyy-MM-dd}.%i.log</fileNamePattern>  
+            <MaxHistory>300</MaxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>300MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+           <pattern>%date %level [%thread] %logger{50} [%file : %line] %msg%n</pattern>  
+        </encoder>
+    </appender>
+    
+    <!-- 
+    logger主要用于存放日志对象，也可以定义日志类型、级别
+    name：表示匹配的logger类型前缀，也就是包的前半部分
+    level：要记录的日志级别，包括 TRACE < DEBUG < INFO < WARN < ERROR
+    additivity：作用在于children-logger是否使用 rootLogger配置的appender进行输出，false：表示只用当前logger的appender-ref，true：表示当前logger的appender-ref和rootLogger的appender-ref都有效
+    -->
+    <!-- hibernate logger -->
+<!--     <logger name="org.hibernate" level="error" /> -->
+    <!-- Spring framework logger -->
+   <!--  <logger name="org.springframework" level="error" additivity="false"></logger>
+
+    <logger name="com.creditease" level="info" additivity="true">
+        <appender-ref ref="appLogAppender" />
+    </logger> -->
+
+    <!-- 
+    root与logger是父子关系，没有特别定义则默认为root，任何一个类只会和一个logger对应，
+    要么是定义的logger，要么是root，判断的关键在于找到这个logger，然后判断这个logger的appender和level。 
+    -->
+<!--      <logger name="dao" level="debug" /> -->
+    <root level="info">
+        <appender-ref ref="stdout" />
+        <appender-ref ref="infoAppender" />
+    </root>
+</configuration> 

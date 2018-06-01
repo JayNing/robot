@@ -1,0 +1,203 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style>
+.border_green{
+	border: 2px solid #43b548;
+}
+</style>
+</head>
+<body>
+	<div class="content">
+		<div style="width:261px;float:left;" id="ttt_1">
+		</div>
+		<div style="width:261px;float:left;" id="ttt_2">
+		</div>
+		<div style="width:261px;float:left;" id="ttt_3">
+		</div>
+		<div id="loadMoreDiv" style="display:none;clear: both;text-align: center; margin-top: 20px; background-color:#ddd; color:white; cursor:pointer;" onclick="loadMore();">
+			<span style="display: inline-block; height: 30px; line-height: 30px; color: #222;">继续加载</span>
+		</div>
+	</div>
+	<!-- <div style="width:100%;padding: 10px 0px;">
+		<span onclick="submitSelect();" style="border:1px solid #ddd; border-radius:5px; cursor: pointer; text-align: center; display: inline-block; width: 80px; height: 36px; line-height: 36px; color:#ddd;">确定</span>
+		<span onclick="cancelSelect();" style="border:1px solid #ddd; border-radius:5px; cursor: pointer; text-align: center; display: inline-block; width: 80px; height: 36px; line-height: 36px; color:#ddd;">取消</span>
+	</div> -->
+	<!--页面中一定要引入internal.js为了能直接使用当前打开dialog的实例变量-->
+	<!--internal.js默认是放到dialogs目录下的-->
+	<script type="text/javascript" src="/public/lib/ueditor/dialogs/internal.js"></script>
+	<script src="http://libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
+</body>
+<script>
+	function handErr(result){
+	    if (typeof result == 'string') {
+	        if(result.indexOf('loginPress()') >= 0 || result.indexOf('<body ng-app="app">') >= 0){
+	            window.location.href="/public/Login.html";
+	        }
+	    }else{
+			if(result.errorMsg){
+			    if(result.errorMsg.length > 0){
+					if(result.errorMsg[0] == "请重新登录并选择公众号!"){
+					    window.location.href="/public/Login.html";
+					}else{
+					    var error_msg = '';
+					    for (var i = 0; i < result.errorMsg.length; i++) {
+							error_msg += '\n';
+							error_msg += result.errorMsg[i];
+					    }
+					    alert(error_msg);
+					}
+			    }
+			}else{
+			    console.log(result);
+			}
+	    }
+	}
+    function loadMaterialImgTotal(){
+		var result = 0;
+		var url = "/material/total";
+		$.ajax({
+		    url : url,
+		    async : false,
+		    type : 'POST',
+		    data : {
+				type : "image"
+		    },
+		    success : function(data) {
+				if (data.error_code == 0) {
+				    result = data.data;
+				} else {
+				    handErr(data);
+				}
+		    },
+		    error : function(data, status, e) {
+				console.log(data);
+		    }
+		});
+		return result;
+	};
+	function loadMaterialImg(page){
+	    var result = [];
+	    var url = "/material/list";
+		$.ajax({
+		    url : url,
+		    async : false,
+		    type : 'POST',
+		    data : {
+				type : "image",
+				page : page
+		    },
+		    success : function(data) {
+				if (data.error_code == 0) {
+				    result = data.data;
+				} else {
+				    handErr(data);
+				}
+		    },
+		    error : function(data, status, e) {
+				console.log(data);
+		    }
+		});
+		return result;
+	}
+	//业务
+	var currentPage = 1;
+	var selectedMatImgs = [];
+	var imgTotal = 0;
+	function toogleSelectImg(index, uuid){
+	    var uuidIndex = selectedMatImgs.indexOf(uuid);
+	    if(uuidIndex >= 0){
+			//删除
+			selectedMatImgs.splice(uuidIndex,1);
+			$("#mat_img_" + index).removeClass("border_green");
+	    }else{
+			//选中
+			selectedMatImgs.push(uuid);
+			$("#mat_img_" + index).addClass("border_green");
+	    }
+	    console.log('-------Selected - material - img---------');
+	    console.log(selectedMatImgs);
+	    console.log('-----------------------------------------');
+	}
+	function checkLoadMore(){
+	    var currentCount = $("div[id^='mat_img']").length;
+	    if(currentCount >= imgTotal){
+			$("#loadMoreDiv").css("display","none");
+			return false;
+	    }else{
+			$("#loadMoreDiv").css("display","block");
+			return true;
+	    }
+	}
+	function loadMore(){
+	    if(checkLoadMore()){
+			currentPage++;
+			loadData(currentPage);
+	    }
+	}
+	function loadData(page){
+	    var list = loadMaterialImg(page);
+	    console.log('-------------material - img--------------');
+	    console.log(list);
+	    console.log('-----------------------------------------');
+	    if(list.length > 0){
+			var currentCount = $("div[id^='mat_img']").length;
+			for(var i=0,l=list.length; i<l; i++){
+			    if(i % 3 == 0){
+					$("#ttt_1").append($('<div style="float:left;width:257px;" pic_src="' + list[i].localUrl + '" pic_uuid="' + list[i].uuid + '" id="mat_img_' + (currentCount+i) + '" onclick="toogleSelectImg(' + (currentCount+i) + ',\'' + list[i].uuid + '\');"><img style="width:100%" src="' + list[i].localUrl + '"/></div>'));					
+			    }else if(i % 3 == 1){
+					$("#ttt_2").append($('<div style="float:left;width:257px;" pic_src="' + list[i].localUrl + '" pic_uuid="' + list[i].uuid + '" id="mat_img_' + (currentCount+i) + '" onclick="toogleSelectImg(' + (currentCount+i) + ',\'' + list[i].uuid + '\');"><img style="width:100%" src="' + list[i].localUrl + '"/></div>'));					
+			    }else if(i % 3 == 2){
+					$("#ttt_3").append($('<div style="float:left;width:257px;" pic_src="' + list[i].localUrl + '" pic_uuid="' + list[i].uuid + '" id="mat_img_' + (currentCount+i) + '" onclick="toogleSelectImg(' + (currentCount+i) + ',\'' + list[i].uuid + '\');"><img style="width:100%" src="' + list[i].localUrl + '"/></div>'));					
+			    }
+			}
+	    }
+	    checkLoadMore();
+	}
+	function submitSelect(){
+	    console.log('--------------selected imgs--------------');
+	    var rs = $(".border_green");
+	    console.log(rs.length);
+	    console.log('-----------------------------------------');
+	    var imgArr = [];
+	    for(var i=0,l=rs.length; i<l; i++){
+			var content0 = editor.getContent();
+			var content1 = content0 + '<p><img style="max-width: 100%; height: auto!important;" id="selected_img_' + $(rs[i]).attr("pic_uuid") + '" src="' + $(rs[i]).attr("pic_src") + '"/></p>';
+			editor.setContent(content1);
+			console.log('--------------content 0------------------');
+		    console.log(content0);
+		    console.log('-----------------------------------------');
+			console.log('--------------content 1------------------');
+		    console.log(content1);
+		    console.log('-----------------------------------------');
+	    }
+	}
+	function cancelSelect(){
+	    dialog.close(false);
+	}
+	$(function(){
+	    console.log('-------------------editor----------------');
+	    console.log(editor);
+	    console.log('-----------------------------------------');
+	    console.log('-------------------dialog----------------');
+	    console.log(dialog);
+	    console.log('-----------------------------------------');
+	    dialog.onclose = function(type,v2){
+			console.log('-------------------close type----------------');
+			console.log(type);
+			console.log('---------------------------------------------');
+			console.log('------------------------v2-------------------');
+			console.log(v2);
+			console.log('---------------------------------------------');
+			if(v2){
+			    //
+				submitSelect();
+			}
+	    }
+	    imgTotal = loadMaterialImgTotal();
+	    loadData(currentPage);
+	})
+</script>
+</html>

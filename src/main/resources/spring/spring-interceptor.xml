@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans   
+        http://www.springframework.org/schema/beans/spring-beans-4.1.xsd   
+        http://www.springframework.org/schema/context   
+        http://www.springframework.org/schema/context/spring-context-4.1.xsd   
+        http://www.springframework.org/schema/mvc   
+        http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd">
+
+	<mvc:annotation-driven />
+	<mvc:resources mapping="css/**" location="/css/" />
+	<mvc:resources mapping="img/**" location="/img/" />
+	<mvc:resources mapping="js/**" location="/js/" />
+	<mvc:resources mapping="lib/**" location="/lib/" />
+	<mvc:resources mapping="static/**" location="/static/" />
+	<mvc:resources mapping="templates/**" location="/templates/" />
+	<mvc:resources mapping="index.html" location="/index.html" />
+	<mvc:resources mapping="login.html" location="/login.html" />
+	<mvc:resources mapping="loginError.html" location="/loginError.html" />
+	
+	<!-- 拦截器配置 -->
+	<!--<mvc:interceptors>-->
+		<!--&lt;!&ndash; 多个拦截器,顺序执行 &ndash;&gt;-->
+		<!--<mvc:interceptor>-->
+			<!--&lt;!&ndash; 需要拦截的url &ndash;&gt;-->
+			<!--<mvc:mapping path="/**" />-->
+			<!--&lt;!&ndash; 不拦截该请求 &ndash;&gt;-->
+			<!--<mvc:exclude-mapping path="/css/**" />-->
+			<!--<mvc:exclude-mapping path="/data/**" />-->
+			<!--<mvc:exclude-mapping path="/i18n/**" />-->
+			<!--<mvc:exclude-mapping path="/img/**" />-->
+			<!--<mvc:exclude-mapping path="/screen/**" />-->
+			<!--<mvc:exclude-mapping path="/js/**" />-->
+			<!--<mvc:exclude-mapping path="/lib/**" />-->
+			<!--<mvc:exclude-mapping path="/file/**" />-->
+			<!--<mvc:exclude-mapping path="/resource/**" />-->
+			<!--<mvc:exclude-mapping path="/subscribe/callback/**" />-->
+			<!--<mvc:exclude-mapping path="/templates/**" />-->
+			<!--<mvc:exclude-mapping path="/index.html" />-->
+			<!--<mvc:exclude-mapping path="/login.html" />-->
+			<!--<mvc:exclude-mapping path="/MapFrame.html" />-->
+			<!--<mvc:exclude-mapping path="/doLogin" />-->
+			<!--<mvc:exclude-mapping path="/common/**" />-->
+			<!--<mvc:exclude-mapping path="/test/**" />-->
+			<!--<mvc:exclude-mapping path="/" />-->
+			<!--&lt;!&ndash; 拦截器实现类 &ndash;&gt;-->
+			<!--<bean class="com.joysuch.common.interceptor.LoginInterceptor" />-->
+		<!--</mvc:interceptor>-->
+		
+		<!--<mvc:interceptor>
+            &lt;!&ndash; 需要拦截的url &ndash;&gt;
+            <mvc:mapping path="/**" />
+            &lt;!&ndash; 不拦截该请求 &ndash;&gt;
+            <mvc:exclude-mapping path="/css/**" />
+            <mvc:exclude-mapping path="/data/**" />
+            <mvc:exclude-mapping path="/screen/**" />
+            <mvc:exclude-mapping path="/img/**" />
+            <mvc:exclude-mapping path="/i18n/**" />
+            <mvc:exclude-mapping path="/js/**" />
+            <mvc:exclude-mapping path="/lib/**" />
+                <mvc:exclude-mapping path="/file/**" />
+            <mvc:exclude-mapping path="/resource/**" />
+            <mvc:exclude-mapping path="/templates/**" />
+            <mvc:exclude-mapping path="/index.html" />
+            <mvc:exclude-mapping path="/login.html" />
+            <mvc:exclude-mapping path="/common/**" />
+            <mvc:exclude-mapping path="/subscribe/callback/**" />
+            <mvc:exclude-mapping path="/" />
+            &lt;!&ndash; 拦截器实现类 &ndash;&gt;
+            <bean class="com.joysuch.common.interceptor.LoggerInterceptor" />
+        </mvc:interceptor>-->
+	<!--</mvc:interceptors>-->
+
+</beans>  

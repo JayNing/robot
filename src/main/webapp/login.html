@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>登录</title>
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="static/plugins/layui/css/layui.css">
+    <link rel="stylesheet" href="static/plugins/dist/css/weui.css">
+    <style>
+        input::-webkit-input-placeholder { /* WebKit browsers */color: #e5e5e5;}
+        input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */color: #e5e5e5;}
+        input::-moz-placeholder { /* Mozilla Firefox 19+ */color: #e5e5e5;}
+        input:-ms-input-placeholder { /* Internet Explorer 10+ */color: #e5e5e5;}
+    </style>
+</head>
+<body style="background-color: #ffffff">
+
+    <div class="order-nr-tab">
+        <div class="order-tab-ys order-bg-1" id="login-user">账户密码登录</div>
+        <div class="order-tab-ys order-bg-2" id="login-tel">手机验证登录</div>
+    </div>
+    <div class="order-login-status login-user">
+        <div class="login-sty bot-solid-1">
+            <label class="layui-icon" style=" color: #34C0E3;">&#xe612;</label>
+            <label>账户</label>
+            <input type="text" placeholder="请输入身份证号" maxlength="18" id="username" name="username" class="login-input-a"/>
+        </div>
+        <div class="login-sty bot-solid-1">
+            <label class="layui-icon" style="color: #34C0E3;">&#xe64c;</label>
+            <label>密码</label>
+            <input type="password" placeholder="请输入密码" id="password" maxlength="32" name="password" class="login-input-a"/>
+        </div>
+        <div class="login-sty login-wjm">
+            <a href="/templates/resetPs.html" >忘记密码？</a>
+        </div>
+        <div class="login-sty">
+            <button class="login-btn" onclick="doLogin('username')">登录</button>
+        </div>
+    </div>
+    <div class="order-login-status login-tel">
+        <div class="login-sty bot-solid-1 login-r-re">
+            <label>手机号</label>
+            <input type="text" id="phone" name="phone" placeholder="请输入手机号" class="login-input-a login-input-ab"/>
+            <a class="login-hqy" href="javascript:void(0);" onclick="sendAuthCode()" >获取验证码</a>
+        </div>
+        <div class="login-sty bot-solid-1">
+            <label>验证码</label>
+            <input type="text" id="authCode" name="authCode" placeholder="请输入验证码" class="login-input-a"/>
+        </div>
+        <div class="login-sty login-wjm">
+            <a href="/templates/resetPs.html" >忘记密码？</a>
+        </div>
+        <div class="login-sty">
+            <button class="login-btn" onclick="doLogin('phone')">登录</button>
+        </div>
+    </div>
+    <!--说明-->
+    <div class="layui-row  layui-zxt">
+        <div class="layui-col-xs12 ">
+            没有账号
+            <a href="/templates/regist.html" class="weui-fcolor4">立即注册</a>
+        </div>
+    </div>
+    <!--说明end-->
+
+</div>
+
+<script src="static/js/jquery.min.js"></script>
+<script src="js/validators.js"></script>
+<script src="js/util.js"></script>
+    <script src="../static/plugins/layui/layui.js"></script>
+
+
+<script>
+
+    $(function () {
+        $('#login-user').on('click',function () {
+            $('#login-user').addClass('order-bg-1').removeClass('order-bg-2');
+            $('#login-tel').removeClass('order-bg-1').addClass('order-bg-2');
+
+            $('.login-user').show();
+            $('.login-tel').hide();
+        });
+        $('#login-tel').on('click',function () {
+            $('#login-tel').addClass('order-bg-1').removeClass('order-bg-2');
+            $('#login-user').removeClass('order-bg-1').addClass('order-bg-2');
+
+            $('.login-tel').show();
+            $('.login-user').hide();
+        });
+    });
+
+
+    function sendAuthCode() {
+        var phone = $('#phone').val();
+        if(phone && phone != ''){
+            if(validateMobile(phone)){
+                $.ajax({
+                    url : '/regist/sendAuthCode',
+                    data : {
+                        'phone' : phone,
+                        'reason'  : 'phoneLogin'
+                    },
+                    async: false,
+                    type : 'POST',
+                    dataType : 'json',
+                    success : function(dataMsg){
+                        console.log(dataMsg);
+                        if(dataMsg.errorCode == 0){
+                            var authCode = dataMsg.data;
+                            $('#authCode').val(authCode);
+                        }else if(dataMsg.errorCode == -1){
+                           window.location.href = dataMsg.data;
+                        }else {
+                            showErrorDialog(dataMsg.errorMsg);
+                        }
+                    },
+                    error : function(err){
+                        showErrorDialog(err);
+                    }
+                });
+            }else {
+                showErrorDialog('手机号格式不正确')
+            }
+        }else {
+            showErrorDialog('手机号不能为空');
+        }
+    }
+
+    function doLogin(type) {
+
+        var username = "";
+        var password = "";
+        var phone = "";
+        var authCode = "";
+        if (type == 'phone'){
+            phone = $('#phone').val();
+            authCode = $('#authCode').val();
+            if(phone == '' || authCode == ''){
+                showErrorDialog("手机和验证码不能为空");
+                return;
+            }
+            if(!validateMobile(phone)){
+                showErrorDialog("手机号格式不正确");
+                return;
+            }
+
+        }else if(type == 'username'){
+            username = $('#username').val();
+            password = $('#password').val();
+            if(username == '' || password == ''){
+                showErrorDialog("身份证号和密码不能为空");
+                return;
+            }
+            if(!isCardNo(username)){
+                showErrorDialog("身份证格式不正确");
+                return;
+            }
+        }
+
+        $.ajax({
+            url : '/doLogin',
+            data : {
+                'type' : type,
+                'username' : username,
+                'password' :password,
+                'phone' :phone,
+                'authCode':authCode
+            },
+            async: false,
+            type : 'POST',
+            dataType : 'json',
+            success : function(dataMsg){
+                console.log(dataMsg);
+                if(dataMsg.errorCode == 0){
+                   window.location = "/templates/home.html";
+                }else{
+                    showErrorDialog(dataMsg.errorMsg);
+                }
+            },
+            error : function(err){
+                showErrorDialog(err);
+                return;
+            }
+        });
+    }
+
+</script>
+</body>
+</html>

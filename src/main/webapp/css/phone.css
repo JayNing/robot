@@ -1,0 +1,259 @@
+.phone_div {
+	float: left;
+	position: relative;
+	margin-top: 10px;
+	width: 318px;
+	height: 735px;
+	background: #f6f6f8 url("../img/phone.png") no-repeat center 5px;
+	background-color: rgb(85, 189, 71);
+	text-align: center;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.phone_logo_area {
+	line-height: 42px;
+	color: #8d8d8d;
+}
+
+.phone_base_panel {
+	position: relative;
+	top: 60px;
+	border-radius: 5px;
+	background-color: #fff;
+	position: relative;
+}
+
+.phone_logo {
+	display: block;
+	width: 38px;
+	height: 38px;
+	padding-top: 0;
+	margin: 0 auto;
+	border-radius: 22px;
+	-moz-border-radius: 22px;
+	-webkit-border-radius: 22px;
+	float: none;
+	border: 1px solid #e7e7eb;
+	background-color: #fff;
+}
+
+.phone_logo img {
+	display: block;
+	width: 38px;
+	height: 38px;
+	border-radius: inherit;
+	-moz-border-radius: inherit;
+	-webkit-border-radius: inherit;
+}
+
+.phone_tick_msg {
+	margin-bottom: 6px;
+}
+
+.phone_card_name {
+	margin: 0;
+	font-weight: normal;
+	font-size: 28px;
+	word-break: break-word;
+	word-wrap: break-word;
+	height: 35px;
+}
+
+.phone_card_name_sub {
+	margin: 0;
+	height: 24px;
+}
+
+.phone_btn {
+	border-width: 0;
+	min-width: 60px;
+	display: inline-block;
+	overflow: visible;
+	padding: 0 22px;
+	height: 35px;
+	line-height: 35px;
+	vertical-align: middle;
+	text-align: center;
+	text-decoration: none;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	font-size: 14px;
+	cursor: pointer;
+	background-color: rgb(85, 189, 71);
+}
+
+.phone_card_usage {
+	text-align: left;
+	background-color: #fff;
+	border-bottom: 1px dashed #e7e7eb;
+}
+
+.phone_card_usage ul {
+	padding-left: 10px;
+}
+
+.phone_card_usage li {
+	list-style-type: none;
+	overflow: hidden;
+	clear: both;
+	color: #8d8d8d;
+}
+
+.phone_card_usage_label {
+	float: left;
+	color: #222;
+}
+
+.phone_fm_img {
+	background-color: #fff;
+}
+
+.phone_fm_img_list {
+	overflow: hidden;
+	border-bottom: 0;
+	margin: 0 10px;
+	padding-left: 0;
+	list-style-type: none;
+}
+
+.phone_msg_card_section {
+	padding-bottom: 1px;
+	position: relative;
+	display: list-item;
+	text-align: -webkit-match-parent;
+	list-style-type: none;
+}
+
+.phone_li_panel {
+	padding: 11px 0 0;
+	border-bottom: 1px solid #e7e7eb;
+}
+
+.phone_li_content {
+	
+}
+
+.phone_section_card_intro {
+	position: relative;
+	width: 100%;
+	height: auto;
+	color: #8d8d8d;
+	overflow: hidden;
+	padding: 0;
+	word-wrap: break-word;
+	word-break: break-all;
+	min-height: 24px;
+}
+
+.phone_cover_wrap {
+	overflow: hidden;
+	max-height: 116px;
+	height: auto;
+	padding-top: 5px;
+}
+
+.phone_cover_summary {
+	text-align: left;
+	height: 24px;
+	background: rgba(0, 0, 0, 0.7);
+	margin-top: 0;
+	position: absolute;
+	z-index: 9;
+	left: 0;
+	width: 100%;
+	bottom: 0;
+	color: #fff;
+	text-indent: 1em;
+}
+
+.phone_ic {
+	position: absolute;
+	right: 5px;
+	width: 16px;
+	height: 15px;
+	background: url("../img/card_control_z2dcda9.png") 0 -80px no-repeat;
+	top: 5px;
+}
+
+.phone_shop_detail {
+	text-align: left;
+}
+
+.phone_shop_detail_list {
+	padding-left: 0;
+	list-style-type: none;
+}
+
+.phone_last_li {
+	border-bottom: 0;
+	border-bottom-width: 0;
+}
+
+.form_det_div {
+	float: right;
+	width: 600px;
+	margin-top: 10px;
+}
+
+.phone_mask {
+	color: rgba(255, 255, 255, .8);
+	font-size: 30px;
+	background-color: rgba(0, 0, 0, .5);
+	align-items: center;
+	position: absolute;
+	width: 100%;
+	text-align: center;
+	border-radius : 5px;
+}
+.poiTable{
+	border: 1px solid #ddd;
+    margin-bottom: 0;
+    width: 100%;
+    max-width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+.poiTable thead{
+    text-align: left;
+    background-color: #ddd;
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+.poiTable tbody tr{
+	border: 1px solid #ddd;
+}
+.row_div{
+    height: 35px;
+	clear: both;
+	padding-left: 10px;
+  padding-top: 5px;
+	padding-right: 10px;
+}
+.label_div{
+    line-height: 35px;
+	font-weight: bold;
+	float: left;
+	width: 120px;
+}
+.label_val_div{
+    line-height: 35px;
+	float: left;
+	width: 400px;
+}
+.label_val_div_big{
+  line-height: 35px;
+	float: left;
+	/* width: 600px; */
+}
+.label_val_logo_img{
+	width:120px;
+	height:120px;
+}
+.line_div{
+	height: 20px;
+	clear: both;
+	border-bottom: 1px solid #ddd;
+}
