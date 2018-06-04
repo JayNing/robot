@@ -6,13 +6,11 @@ import com.zx.robot.server.WebsocketMessageHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Component
+//@Component
 public class CheckUserInfoTimer {
 
     private static Logger logger = LoggerFactory.getLogger(CheckUserInfoTimer.class);
@@ -23,7 +21,7 @@ public class CheckUserInfoTimer {
     private WebsocketMessageHandler websocketMessageHandler;
 
 
-    @Scheduled(fixedDelay = 1000 * 30, initialDelay = 1000 * 5)
+//    @Scheduled(fixedDelay = 1000 * 30, initialDelay = 1000 * 5)
     public void checkUserInfo() {
 
         logger.info("CheckUserInfoTimer is called...... " + LocalDateTime.now());
@@ -32,7 +30,7 @@ public class CheckUserInfoTimer {
 
         logger.info("sysUserList : " + sysUserList);
 
-        websocketMessageHandler.broadcastUserInfo("1","CheckUserInfoTimer is called...... " + LocalDateTime.now());
+        websocketMessageHandler.broadcastInfo("1","CheckUserInfoTimer is called...... " + LocalDateTime.now());
     }
 
 

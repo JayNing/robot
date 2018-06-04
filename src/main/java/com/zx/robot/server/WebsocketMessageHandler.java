@@ -52,14 +52,14 @@ public class WebsocketMessageHandler {
         }
     }
 
-    public void broadcastUserInfo(String robotId, String msg) {
+    public void broadcastInfo(String robotId, Object msg) {
         List<SessionContext> buildSessions = sessionManager.buildSessions(robotId);
         if (!CommonUtil.isListEmpty(buildSessions)) {
             for (SessionContext sessionContext : buildSessions) {
                 ReturnMsg respMsg = new ReturnMsg();
                 respMsg.setData(msg);
                 respMsg.setErrorCode(0);
-                sessionContext.write(ProtocolResponseBuilder.responseMsg(respMsg, "broadcastUserInfo"));
+                sessionContext.write(ProtocolResponseBuilder.responseMsg(respMsg, "broadcastInfo"));
             }
         }
     }

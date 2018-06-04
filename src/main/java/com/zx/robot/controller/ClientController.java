@@ -1,6 +1,8 @@
-package com.zx.common.controller;
+package com.zx.robot.controller;
 
 import com.zx.common.entity.ReturnMsg;
+import com.zx.robot.service.InspectionDataService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -12,6 +14,9 @@ import java.net.UnknownHostException;
 @RequestMapping("client")
 @Controller
 public class ClientController {
+
+    @Autowired
+    private InspectionDataService inspectionDataService;
 
     @RequestMapping("start")
     public @ResponseBody ReturnMsg start(){
@@ -45,6 +50,20 @@ public class ClientController {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+
+ /*     //模拟机器人收到客户端通知，开始每3秒上报一次数据到数据库
+        new Thread( () -> {
+            for (double i = 0; i < 20; i++){
+                InspectionData inspectionData = new InspectionData(i,i,i,i,i,i,i,i,i,i,i,i,"a_" + i, new Date());
+                inspectionDataService.insert(inspectionData);
+                try {
+                    Thread.sleep(3000L);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        } ).start();
+*/
         ReturnMsg msg = new ReturnMsg();
         msg.setErrorCode(0);
         msg.setData("向机器人发送开始指令成功！");

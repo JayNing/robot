@@ -35,15 +35,16 @@
     };
 
     ws.onmessage = function(evt) {
-        console.log("Received Message: " + evt.data);
+        // console.log("Received Message: " + evt.data);
         var responseData =  evt.data;
         var work2 = JSON.parse(responseData);
         var responseType = work2.responseType;
-        console.log("responseType: " + responseType);
+        // console.log("responseType: " + responseType);
         if(responseType == 'ping'){
             ws.send(JSON.stringify(date));
         }else {
-            $('#textH1').append(work2.data.data);
+            console.log(work2.data.data);
+            $('#textH1').append(work2.data.data.id + ", " + work2.data.data.target + "</br>");
         }
     };
 

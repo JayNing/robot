@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.robot.mapper.InspectionDataMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.robot.entity.InspectionData" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="HighT" property="hight" jdbcType="DOUBLE" />
+    <result column="HighH" property="highh" jdbcType="DOUBLE" />
+    <result column="MiddleT" property="middlet" jdbcType="DOUBLE" />
+    <result column="MiddleH" property="middleh" jdbcType="DOUBLE" />
+    <result column="LowT" property="lowt" jdbcType="DOUBLE" />
+    <result column="LowH" property="lowh" jdbcType="DOUBLE" />
+    <result column="ArmT" property="armt" jdbcType="DOUBLE" />
+    <result column="WindSpeed" property="windspeed" jdbcType="DOUBLE" />
+    <result column="RobotX" property="robotx" jdbcType="DOUBLE" />
+    <result column="RobotY" property="roboty" jdbcType="DOUBLE" />
+    <result column="RobotH" property="roboth" jdbcType="DOUBLE" />
+    <result column="Battery" property="battery" jdbcType="DOUBLE" />
+    <result column="Target" property="target" jdbcType="VARCHAR" />
+    <result column="CreateTime" property="createtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, HighT, HighH, MiddleT, MiddleH, LowT, LowH, ArmT, WindSpeed, RobotX, RobotY, 
+    RobotH, Battery, Target, CreateTime
+  </sql>
+  <select id="selectNewLastUser" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from inspection_data
+   order by id desc
+    limit 1
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from inspection_data
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from inspection_data
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.robot.entity.InspectionData" >
+    insert into inspection_data (HighT, HighH,
+      MiddleT, MiddleH, LowT, 
+      LowH, ArmT, WindSpeed, 
+      RobotX, RobotY, RobotH, 
+      Battery, Target, CreateTime
+      )
+    values (#{hight,jdbcType=DOUBLE}, #{highh,jdbcType=DOUBLE},
+      #{middlet,jdbcType=DOUBLE}, #{middleh,jdbcType=DOUBLE}, #{lowt,jdbcType=DOUBLE}, 
+      #{lowh,jdbcType=DOUBLE}, #{armt,jdbcType=DOUBLE}, #{windspeed,jdbcType=DOUBLE}, 
+      #{robotx,jdbcType=DOUBLE}, #{roboty,jdbcType=DOUBLE}, #{roboth,jdbcType=DOUBLE}, 
+      #{battery,jdbcType=DOUBLE}, #{target,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.robot.entity.InspectionData" >
+    insert into inspection_data
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="hight != null" >
+        HighT,
+      </if>
+      <if test="highh != null" >
+        HighH,
+      </if>
+      <if test="middlet != null" >
+        MiddleT,
+      </if>
+      <if test="middleh != null" >
+        MiddleH,
+      </if>
+      <if test="lowt != null" >
+        LowT,
+      </if>
+      <if test="lowh != null" >
+        LowH,
+      </if>
+      <if test="armt != null" >
+        ArmT,
+      </if>
+      <if test="windspeed != null" >
+        WindSpeed,
+      </if>
+      <if test="robotx != null" >
+        RobotX,
+      </if>
+      <if test="roboty != null" >
+        RobotY,
+      </if>
+      <if test="roboth != null" >
+        RobotH,
+      </if>
+      <if test="battery != null" >
+        Battery,
+      </if>
+      <if test="target != null" >
+        Target,
+      </if>
+      <if test="createtime != null" >
+        CreateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="hight != null" >
+        #{hight,jdbcType=DOUBLE},
+      </if>
+      <if test="highh != null" >
+        #{highh,jdbcType=DOUBLE},
+      </if>
+      <if test="middlet != null" >
+        #{middlet,jdbcType=DOUBLE},
+      </if>
+      <if test="middleh != null" >
+        #{middleh,jdbcType=DOUBLE},
+      </if>
+      <if test="lowt != null" >
+        #{lowt,jdbcType=DOUBLE},
+      </if>
+      <if test="lowh != null" >
+        #{lowh,jdbcType=DOUBLE},
+      </if>
+      <if test="armt != null" >
+        #{armt,jdbcType=DOUBLE},
+      </if>
+      <if test="windspeed != null" >
+        #{windspeed,jdbcType=DOUBLE},
+      </if>
+      <if test="robotx != null" >
+        #{robotx,jdbcType=DOUBLE},
+      </if>
+      <if test="roboty != null" >
+        #{roboty,jdbcType=DOUBLE},
+      </if>
+      <if test="roboth != null" >
+        #{roboth,jdbcType=DOUBLE},
+      </if>
+      <if test="battery != null" >
+        #{battery,jdbcType=DOUBLE},
+      </if>
+      <if test="target != null" >
+        #{target,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.robot.entity.InspectionData" >
+    update inspection_data
+    <set >
+      <if test="hight != null" >
+        HighT = #{hight,jdbcType=DOUBLE},
+      </if>
+      <if test="highh != null" >
+        HighH = #{highh,jdbcType=DOUBLE},
+      </if>
+      <if test="middlet != null" >
+        MiddleT = #{middlet,jdbcType=DOUBLE},
+      </if>
+      <if test="middleh != null" >
+        MiddleH = #{middleh,jdbcType=DOUBLE},
+      </if>
+      <if test="lowt != null" >
+        LowT = #{lowt,jdbcType=DOUBLE},
+      </if>
+      <if test="lowh != null" >
+        LowH = #{lowh,jdbcType=DOUBLE},
+      </if>
+      <if test="armt != null" >
+        ArmT = #{armt,jdbcType=DOUBLE},
+      </if>
+      <if test="windspeed != null" >
+        WindSpeed = #{windspeed,jdbcType=DOUBLE},
+      </if>
+      <if test="robotx != null" >
+        RobotX = #{robotx,jdbcType=DOUBLE},
+      </if>
+      <if test="roboty != null" >
+        RobotY = #{roboty,jdbcType=DOUBLE},
+      </if>
+      <if test="roboth != null" >
+        RobotH = #{roboth,jdbcType=DOUBLE},
+      </if>
+      <if test="battery != null" >
+        Battery = #{battery,jdbcType=DOUBLE},
+      </if>
+      <if test="target != null" >
+        Target = #{target,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.robot.entity.InspectionData" >
+    update inspection_data
+    set HighT = #{hight,jdbcType=DOUBLE},
+      HighH = #{highh,jdbcType=DOUBLE},
+      MiddleT = #{middlet,jdbcType=DOUBLE},
+      MiddleH = #{middleh,jdbcType=DOUBLE},
+      LowT = #{lowt,jdbcType=DOUBLE},
+      LowH = #{lowh,jdbcType=DOUBLE},
+      ArmT = #{armt,jdbcType=DOUBLE},
+      WindSpeed = #{windspeed,jdbcType=DOUBLE},
+      RobotX = #{robotx,jdbcType=DOUBLE},
+      RobotY = #{roboty,jdbcType=DOUBLE},
+      RobotH = #{roboth,jdbcType=DOUBLE},
+      Battery = #{battery,jdbcType=DOUBLE},
+      Target = #{target,jdbcType=VARCHAR},
+      CreateTime = #{createtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
