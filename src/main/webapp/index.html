@@ -21,25 +21,16 @@
         "time":1111
     };
 
-    var ws = new WebSocket("ws://localhost:8080/websocket/1");
+    var ws = new WebSocket("ws://127.0.0.1:8080/websocket/1");
 
     ws.onopen = function(evt) {
         console.log("Connection open ...");
-        var date = {
-            "direction":"cToS",
-            "requestMethod":"test",
-            "responseType":"",
-            "data":"",
-            "time":1111
-        };
     };
 
     ws.onmessage = function(evt) {
-        // console.log("Received Message: " + evt.data);
         var responseData =  evt.data;
         var work2 = JSON.parse(responseData);
         var responseType = work2.responseType;
-        // console.log("responseType: " + responseType);
         if(responseType == 'ping'){
             ws.send(JSON.stringify(date));
         }else {
@@ -51,7 +42,7 @@
     ws.onclose = function(evt) {
         console.log("Connection closed.");
         setTimeout(function () {
-            ws = new WebSocket("ws://localhost:8080/websocket/1");
+            ws = new WebSocket("ws://127.0.0.1:8080/websocket/1");
         },5000);
     };
 

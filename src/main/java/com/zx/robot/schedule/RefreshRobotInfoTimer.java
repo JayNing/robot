@@ -35,15 +35,14 @@ public class RefreshRobotInfoTimer {
 
         InspectionData inspectionData = inspectionDataMapper.selectNewLastUser();
 
-        logger.info("inspectionData : " + inspectionData);
-
         if (inspectionData != null){
             if (newLastId < inspectionData.getId()){
                 newLastId = inspectionData.getId();
                 websocketMessageHandler.broadcastInfo("1",inspectionData);
             }
+        }else{
+            logger.info("inspectionData is null ! Time is : " + LocalDateTime.now());
         }
-
     }
 
 
