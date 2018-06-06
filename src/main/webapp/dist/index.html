@@ -1,62 +1,65 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>实时监控</title>
-		<link rel="stylesheet" type="text/css" href="../css/reset.min.css"/>
-		<link rel="stylesheet" href="../css/iconfont.css" />
-		<style>
-			.content{max-width: 1200px; margin: auto;}
-			.t_box_l{background: #17245c; width: 55%;}
-			.t_box_r{background: #122154; width: 45%;}
-			.t_box_l,.t_box_r{height: 550px; overflow: hidden; position: relative;}
-			.b_box_l{background: #122154; width: 55%;}
-			.b_box_r{background: #0d1d4b; width: 45%;}
-			.b_box_l,.b_box_r{height: 350px; overflow: hidden; position: relative;}
-			.color_1{color: #7e98ea;} .color_2{color: #c9d6ff;} .color_3{color: #da4c77;} .color_4{color: #7bdaba;}
-			.lin_height4{line-height: 40px;}
-			.dis_inline{display: inline-block;}
-			.content .title{color: #7e98ea; position: relative; line-height: 30px; height: 30px;}
-			.content .title:before{content: ''; display: inline-block; width: 10px; height: 10px; margin-right: 5px; border-radius: 10px; background: #4b6bda;}
-			.t_box,.b_box{font-size: 0;}
-			.t_box >div,.b_box >div{display: inline-block;font-size: 14px; box-sizing: border-box; padding: 20px;}
-			.add_bx_bj img{width: 100%;}
-			.add_bx{text-align: center;}
-			.add_bx .dis_inline{width: 100px; height: 36px; line-height: 36px; position: relative; border-radius: 36px; text-align: center;}
-			.temperatures{background: #17245c; border: 1px solid #102152;}
-			.temperatures .iconfont{font-size: 28px; position: absolute; left: 10px;}
-			.humidity{background: #4f72e6;}
-			.detail{position: relative;}
-			.detail img{width: 100%;}
-			.detail .icon-thermometer{font-size: 22px;}
-			.detail_text{font-size: 14px; position: absolute; left: 0; top: 50px; color: #4B6BDA;}
-			.detail_text >div{position: absolute;width: 150px;}
-			.detail_text >div .iconfont{display: inline-block; width: 25px; text-align: center;}
-			.detail_text .status{width: 50px; display: inline-block; margin: 0 5px; height: 3px; background: #4f72e6; position: relative; bottom: 3px;}
-			.detail_01{ left: 20px; top: 100px;}
-			.detail_02{ left: 160px; top: -20px;}
-			.detail_03{ left: 345px; top: 70px;}
-			.detail_04{ left: 345px; top: 160px;}
-			.detail_05{ left: 345px; top: 240px;}
-			.detail_01 >div,.detail_02 >div{display: inline-block;}
-			.electricity{float: right;position: relative;}
-			.electricity .iconfont{font-size: 32px; position: absolute; left: -35px; top: 2px;}
-			.b_box_detail{position: relative;font-size:0; padding-top: 20px;}
-			.b_box_detail >div{display: inline-block;width: 16.66%; font-size: 14px; text-align: center; margin-top: 30px;}
-			.b_box_detail >div .iconfont{color: #7e98ea; font-size: 46px;}
-			.b_box_detail >div .icon-shuxian1{position: relative; bottom: 5px;}
-			.b_box_detail >div div:nth-child(2){margin-top: 20px;}
-			.b_box_detail >div div:last-child{margin-top: 15px;line-height: 1;}
-			.add_select_t{height: 40px; width: 450px; margin: auto; line-height: 40px; border-bottom: 1px solid #7e98ea;}
-			.select_chect{background: transparent; border: none; width: 350px;}
-			.add_select{padding: 30px;}
-			.add_btn{display: inline-block; width: 200px; margin-left: calc(50% - 100px); margin-left: -moz-calc(50% - 100px); margin-left: 50% - 100px; cursor: pointer; margin-top: 50px; height: 45px; line-height: 45px; text-align: center; background: #1d3d85; border-radius: 4px;}
-			.add_btn:hover{background: #4B6BDA; color: #0D1D4B;}
-			.detail_text .length_c,.detail_text .length_c2{display: inline-block; width: 0%; height: 3px; position: absolute; left: 0; top: 0;}
-			.detail_text .length_c{background: #e63538;}
-			.detail_text .length_c2{background: #66ce66;}
-		</style>
-	</head>
+<head>
+	<meta charset="UTF-8">
+	<title>实时监控</title>
+	<link rel="stylesheet" type="text/css" href="../css/reset.min.css"/>
+	<link rel="stylesheet" href="../css/iconfont.css" />
+	<style>
+		.content{max-width: 1200px; margin: auto;}
+		.t_box_l{background: #17245c; width: 55%;}
+		.t_box_r{background: #122154; width: 45%;}
+		.t_box_l,.t_box_r{height: 550px; overflow: hidden; position: relative;}
+		.b_box_l{background: #122154; width: 55%;}
+		.b_box_r{background: #0d1d4b; width: 45%;}
+		.b_box_l,.b_box_r{height: 350px; overflow: hidden; position: relative;}
+		.color_1{color: #7e98ea;} .color_2{color: #c9d6ff;} .color_3{color: #da4c77;} .color_4{color: #7bdaba;}
+		.lin_height4{line-height: 40px;}
+		.dis_inline{display: inline-block;}
+		.content .title{color: #7e98ea; position: relative; line-height: 30px; height: 30px;}
+		.content .title:before{content: ''; display: inline-block; width: 10px; height: 10px; margin-right: 5px; border-radius: 10px; background: #4b6bda;}
+		.t_box,.b_box{font-size: 0;}
+		.t_box >div,.b_box >div{display: inline-block;font-size: 14px; box-sizing: border-box; padding: 20px;}
+		.add_bx_bj img{width: 100%;}
+		.add_bx{text-align: center;}
+		.add_bx .add_bx_bj{position: relative;}
+		.add_bx .add_bx_bj .myCanvas2{position: absolute; left: calc(50% - 250px); left: -moz-calc(50% - 250px); left: -webkit-calc(50% - 250px); top: 0;}
+		.add_bx .dis_inline{width: 100px; height: 36px; line-height: 36px; position: relative; border-radius: 36px; text-align: center;}
+		.temperatures{background: #17245c; border: 1px solid #102152;}
+		.temperatures .iconfont{font-size: 28px; position: absolute; left: 10px;}
+		.humidity{background: #4f72e6;}
+		.detail{position: relative;}
+		.detail img{width: 100%;}
+		.detail .icon-thermometer{font-size: 22px;}
+		.detail_text{font-size: 14px; position: absolute; left: 0; top: 50px; color: #4B6BDA;}
+		.detail_text >div{position: absolute;width: 150px;}
+		.detail_text >div .iconfont{display: inline-block; width: 25px; text-align: center;}
+		.detail_text .status{width: 50px; display: inline-block; margin: 0 5px; height: 3px; background: #4f72e6; position: relative; bottom: 3px;}
+		.detail_01{ left: 20px; top: 100px;}
+		.detail_02{ left: 160px; top: -20px;}
+		.detail_03{ left: 345px; top: 70px;}
+		.detail_04{ left: 345px; top: 160px;}
+		.detail_05{ left: 345px; top: 240px;}
+		.detail_01 >div,.detail_02 >div{display: inline-block;}
+		.electricity{float: right;position: relative;}
+		.electricity .iconfont{font-size: 32px; position: absolute; left: -35px; top: 2px;}
+		.b_box_detail{position: relative;font-size:0; padding-top: 20px;}
+		.b_box_detail >div{display: inline-block;width: 16.66%; font-size: 14px; text-align: center; margin-top: 30px;}
+		.b_box_detail >div .iconfont{color: #7e98ea; font-size: 46px;}
+		.b_box_detail >div .icon-shuxian1{position: relative; bottom: 5px;}
+		.b_box_detail >div div:nth-child(2){margin-top: 20px;}
+		.b_box_detail >div div:last-child{margin-top: 15px;line-height: 1;}
+		.add_select_t{height: 40px; width: 450px; margin: auto; line-height: 40px; border-bottom: 1px solid #7e98ea;}
+		.select_chect{background: transparent; border: none; width: 350px;}
+		.add_select{padding: 30px;}
+		.add_btn{display: inline-block; width: 200px; margin-left: calc(50% - 100px); margin-left: -moz-calc(50% - 100px); margin-left: 50% - 100px; cursor: pointer; margin-top: 50px; height: 45px; line-height: 45px; text-align: center; background: #1d3d85; border-radius: 4px;}
+		.add_btn:hover{background: #4B6BDA; color: #0D1D4B;}
+		.detail_text .length_c,.detail_text .length_c2{display: inline-block; width: 0%; height: 3px; position: absolute; left: 0; top: 0;}
+		.detail_text .length_c{background: #e63538;}
+		.detail_text .length_c2{background: #66ce66;}
+		.opcity_0{opacity: 0;}
+	</style>
+</head>
 	<body>
 		<div class="content">
 			<div class="t_box">
@@ -67,16 +70,19 @@
 					<div class="add_bx">
 						<div class="add_bx_bj">
 							<!--<img src="../images/add_bj.png"/>-->
-							<canvas id="myCanvas" width="500" height="400">为支持Canvas，请更新你的浏览器</canvas>
+							<canvas id="myCanvas" class="opcity_0" width="500" height="400">为支持Canvas，请更新你的浏览器</canvas>
+							<canvas id="myCanvas2" class="myCanvas2" width="500" height="400">为支持Canvas，请更新你的浏览器</canvas>
 						</div>
-						<div class="dis_inline color_1 temperatures"><span class="iconfont icon-thermometer"></span>温度</div>
-						<div class="dis_inline color_2 humidity"><span class="iconfont icon-water-drop"></span>湿度</div>
+						<div class="check_btn">
+							<div class="dis_inline color_1 temperatures"><span class="iconfont icon-thermometer"></span>温度</div>
+							<div class="dis_inline color_2 humidity"><span class="iconfont icon-water-drop"></span>湿度</div>
+						</div>
 					</div>
 				</div>
 				<div class="t_box_r">
 					<div class="title">
 						机器人实时状态
-						<div class="electricity"><span class="iconfont icon-dianchi dianliang"></span>50%</div>
+						<div class="electricity"><span class="iconfont icon-dianchi dianliang"></span><div id="battery">50%</div></div>
 					</div>
 					<div class="detail">
 						<div class="">
@@ -86,25 +92,25 @@
 							<div class="detail_01">
 								<div><span class="iconfont icon-thermometer"></span>温度</div>
 								<div class="status"><div class="length_c"></div></div>
-								<div class="text">40°</div>
+								<div class="text" id="armT">40°</div>
 							</div>
 							<div class="detail_02">
 								<div><span class="iconfont icon-fengshan"></span>风速</div>
-								<div class="text color_4">5M/S</div>
+								<div class="text color_4" id="windSpeed">5M/S</div>
 							</div>
 							<div class="detail_03">
-								<div><span class="iconfont icon-thermometer"></span>温度<span class="status"><div class="length_c"></div></span><span>40°</span></div>
-								<div><span class="iconfont icon-water-drop"></span>湿度<span class="status"><div class="length_c2"></div></span><span>50%</span></div>
+								<div><span class="iconfont icon-thermometer"></span>温度<span class="status"><div class="length_c"></div></span><span id="hight">40°</span></div>
+								<div><span class="iconfont icon-water-drop"></span>湿度<span class="status"><div class="length_c2"></div></span><span id="highh">50%</span></div>
 								<div></div>
 							</div>
 							<div class="detail_04">
-								<div><span class="iconfont icon-thermometer"></span>温度<span class="status"><div class="length_c"></div></span><span>40°</span></div>
-								<div><span class="iconfont icon-water-drop"></span>湿度<span class="status"><div class="length_c2"></div></span><span>50%</span></div>
+								<div><span class="iconfont icon-thermometer"></span>温度<span class="status"><div class="length_c"></div></span><span id="middlet">40°</span></div>
+								<div><span class="iconfont icon-water-drop"></span>湿度<span class="status"><div class="length_c2"></div></span><span id="middleh">50%</span></div>
 								<div></div>
 							</div>
 							<div class="detail_05">
-								<div><span class="iconfont icon-thermometer"></span>温度<span class="status"><div class="length_c"></div></span><span>40°</span></div>
-								<div><span class="iconfont icon-water-drop"></span>湿度<span class="status"><div class="length_c2"></div></span><span>50%</span></div>
+								<div><span class="iconfont icon-thermometer"></span>温度<span class="status"><div class="length_c"></div></span><span id="lowt">40°</span></div>
+								<div><span class="iconfont icon-water-drop"></span>湿度<span class="status"><div class="length_c2"></div></span><span id="lowh">50%</span></div>
 								<div></div>
 							</div>
 						</div>
@@ -118,34 +124,34 @@
 					</div>
 					<div class="b_box_detail">
 						<div>
-							<div class="color_3">40%</div>
+							<div class="color_3" id="maxT">40%</div>
 							<div><span class="iconfont icon-thermometer moni"></span></div>
-							<div class="color_1">最高温度</div>
+							<div class="color_1" >最高温度</div>
 						</div>
 						<div>
-							<div class="color_3">60℃</div>
+							<div class="color_3" id="minT">60℃</div>
 							<div><span class="iconfont icon-thermometer"></span></div>
-							<div class="color_1">最低温度</div>
+							<div class="color_1" >最低温度</div>
 						</div>
 						<div>
-							<div class="color_4">50%</div>
+							<div class="color_4" id="maxH">50%</div>
 							<div><span class="iconfont icon-thermometer moni2"></span></div>
-							<div class="color_1">最高湿度</div>
+							<div class="color_1" >最高湿度</div>
 						</div>
 						<div>
-							<div class="color_4">30%</div>
+							<div class="color_4" id="minH">30%</div>
 							<div><span class="iconfont icon-thermometer"></span></div>
 							<div class="color_1 ">最低湿度</div>
 						</div>
 						<div>
-							<div class="color_3">60℃</div>
+							<div class="color_3" id="lineT">60℃</div>
 							<div><span class="iconfont icon-shuxian1 moni3"></span></div>
-							<div class="color_1">线缆温度</div>
+							<div class="color_1" >线缆温度</div>
 						</div>
 						<div>
-							<div class="color_1">5M/S</div>
+							<div class="color_1"id="windS">5M/S</div>
 							<div><span class="iconfont icon-fengshan"></span></div>
-							<div class="color_1">风速</div>
+							<div class="color_1" >风速</div>
 						</div>
 					</div>
 				</div>
@@ -172,6 +178,27 @@
 		</div>
 		<script type="text/javascript" src="../js/jquery-1.9.1.min.js" ></script>
 		<script>
+
+			// var showFlag = 't';
+
+            // changeShow(showFlag);
+
+            // function changeShow(type){
+			 //    showFlag = type;
+            //
+			 //    if ('t' == type){
+			 //        $('#classT').attr('class','dis_inline color_2 humidity');
+			 //        $('#classH').attr('class','dis_inline color_1 temperatures');
+			 //        $('#myCanvas').attr("style",{'display':'block'});
+			 //        $('#myCanvas1').attr("style",{'display':'none'});
+				// } else if ('h' == type){
+            //         $('#classT').attr('class','dis_inline color_1 temperatures');
+            //         $('#classH').attr('class','dis_inline color_2 humidity');
+            //         $('#myCanvas').attr("style",{'display':'none'});
+            //         $('#myCanvas').attr("style",{'display':'block'});
+				// }
+            // }
+
 			//模拟温度比例
 			$('.detail_01 .length_c').css('width','40%');
 			$('.detail_03 .length_c').css('width','40%');
@@ -180,7 +207,7 @@
 			$('.detail_04 .length_c2').css('width','50%');
 			$('.detail_05 .length_c').css('width','40%');
 			$('.detail_05 .length_c2').css('width','50%');
-			
+
 			var moni_du = 40+'%'; //当前比例
 			var moni_dur = 40+1+'%'; //剩余
 			var moni_du2 = 30+'%';
@@ -217,7 +244,7 @@
 				    
 				    this.canvas.dom2d.lineWidth=3;
 				},
-				moveTo:function(x, y, c){ //x坐标，y坐标，颜色
+				moveTo:function(x, y, c ){ //x坐标，y坐标，颜色
 					if(this.start_x==0 && this.start_y==0){
 						this.startAddr.x = x;
 						this.startAddr.y = y;
@@ -258,70 +285,162 @@
 			};
 			//模拟数据
 			map.create2d();
-			map.moveTo(15, 15,0);
-			map.moveTo(25, 15,10);
-			map.moveTo(45, 35,30);
-			map.moveTo(55, 150,60);
-			map.moveTo(155, 150,60);
-			map.moveTo(250, 315,90);
+
 			//模拟数据
-			
-			$(function(){
+            var map2 = {	//温度
+                canvas : {
+                    dom:'',
+                    dom2d:'',
+                    domImg:''
+                },
+                startAddr: { x:0, y:0 },
+                lastAddr : { x:0, y:0 },
 
-                var date = {
-                    "direction":"cToS",
-                    "requestMethod":"pong",
-                    "responseType":"",
-                    "data":"",
-                    "time":1111
-                };
-				
-				$('.add_btn').on('click',function(){
-					
-					$.ajax({
-						type:"get",
-						url:"http://127.0.0.1:8080/client/start",
-						success:function(date){
-							if(date.errorCode == 0){								
-								end_onmessage();
-								$('.add_btn').unbind();
-							};
-						}
-					});
-					
-					function end_onmessage(){
+                create2d:function(){
+                    this.canvas.dom = document.getElementById("myCanvas2");
+                    this.canvas.dom2d = this.canvas.dom.getContext("2d");
+                    this.canvas.domImg = new Image();
+
+                    this.canvas.domImg.src = '../images/add_bj2.png';
+                    var _self = this;
+                    this.canvas.domImg.onload = function(){ //图片加载完成之后再绘制图片
+                        _self.canvas.dom2d.drawImage(_self.canvas.domImg,0,0);
+                    }
+
+                    this.canvas.dom2d.lineWidth=3;
+                },
+                moveTo:function(x, y, c){ //x坐标，y坐标，颜色
+                    if(this.start_x==0 && this.start_y==0){
+                        this.startAddr.x = x;
+                        this.startAddr.y = y;
+                        this.create2d();
+                    }else{
+                        this.canvas.dom2d.moveTo(this.lastAddr.x,this.lastAddr.y);
+                        this.canvas.dom2d.lineTo(x,y);
+                        this.canvas.dom2d.strokeStyle = this.colorMap(c);
+                        this.canvas.dom2d.stroke(); //绘制
+                        this.canvas.dom2d.beginPath();  //重新绘制
+                    }
+                    this.lastAddr.x = x;
+                    this.lastAddr.y = y;
+                },
+                colorMap : function(c){
+                    if(c <=10){
+                        return '#420bd6';
+                    }else if(c <=20){
+                        return '#2d6efc';
+                    }else if(c <=30){
+                        return '#00feef';
+                    }else if(c <=40){
+                        return '#00fe9d';
+                    }else if(c <=50){
+                        return '#51c3f7';
+                    }else if(c <=60){
+                        return '#00fe37';
+                    }else if(c <=70){
+                        return '#4ffa04';
+                    }else if(c <=80){
+                        return '#e6fa04';
+                    }else if(c <=90){
+                        return '#ff8503';
+                    }else{
+                        return '#f93503';
+                    }
+                }
+            };
+            map2.create2d();
+			$(function() {
+                $('.add_bx .check_btn .dis_inline').on('click',function(){ //温度湿度按钮切换
+                    var this_index = $(this).index();
+                    $(this).addClass('humidity').siblings().removeClass('humidity');
+                    $(this).addClass('color_2').siblings().removeClass('color_2');
+                    $(this).removeClass('temperatures').siblings().addClass('temperatures');
+                    $(this).removeClass('color_1').siblings().addClass('color_1');
+                    $('.add_bx_bj canvas').eq(this_index).addClass('opcity_0').siblings().removeClass('opcity_0');
+                });
+
+                $('.select_chect').change(function(){ //当选择导航点后才可以点击控制按钮
+                    $('.add_btn').on('click',function(){ //点击开始巡检按钮发送指令
+                        $.ajax({
+                            type:"get",
+                            url:"http://127.0.0.1:8080/client/start",
+                            success:function(date){
+                                if(date.errorCode == 0){	//errorCode为0时执行	end_onmessage();
+
+                                    end_onmessage();
+                                    $('.add_btn').unbind();  //解除按钮绑定click事件，防止重复请求
+                                };
+                            }
+                        });
+                    });
+
+                    var date = {
+                        "direction": "cToS",
+                        "requestMethod": "pong",
+                        "responseType": "",
+                        "data": "",
+                        "time": 1111
+                    };
+
+					function end_onmessage() {
 						var ws = new WebSocket("ws://127.0.0.1:8080/websocket/1");
-			
-					    ws.onopen = function(evt) {
-					        console.log("Connection open ...");
-					    };
-					    ws.onmessage = function(evt) {
-					        var responseData =  evt.data;
-					        var work2 = JSON.parse(responseData);
-					        var responseType = work2.responseType;
-					        if(responseType == 'ping'){
-					            ws.send(JSON.stringify(date));
-					        }else {
-					        	map.moveTo(work2.data.data.robotx, work2.data.data.roboty,0);
-					        	
-					            console.log(work2.data.data);
 
+						ws.onopen = function (evt) {
+							console.log("Connection open ...");
+						};
+						ws.onmessage = function (evt) {
+							var responseData = evt.data;
+							var work2 = JSON.parse(responseData);
+							var responseType = work2.responseType;
+							if (responseType == 'ping') {
+								ws.send(JSON.stringify(date));
+							} else {
+								console.log(work2.data.data);
+								var inspectionData = work2.data.data.inspectionData;
+								console.log(inspectionData);
+								map.moveTo(inspectionData.robotx, inspectionData.roboty, inspectionData.highh);
+								map2.moveTo(inspectionData.robotx, inspectionData.roboty, inspectionData.hight);
 
+								$('#battery').html(inspectionData.battery + '%');
+								$('#armT').html(inspectionData.armt + '°');
+								$('#windSpeed').html(inspectionData.windspeed + ' M/S');
+								$('#hight').text(inspectionData.hight + '°');
+								$('#highh').text(inspectionData.highh + '%');
+								$('#middlet').text(inspectionData.middlet + '°');
+								$('#middleh').text(inspectionData.middleh + '%');
+								$('#lowt').text(inspectionData.lowt + '°');
+								$('#lowh').text(inspectionData.lowh + '%');
+								$('#windS').html(inspectionData.windspeed + ' M/S');
+								$('#lineT').html(inspectionData.armt + '°');
 
-					        }
-					    };
-					
-					    ws.onclose = function(evt) {
-					        console.log("Connection closed.");
-						//TODO 尝试断线重连
-					        setTimeout(function () {
-					            ws = new WebSocket("ws://127.0.0.1:8080/websocket/1");
-					        },5000);
-					    };
+								$('#maxT').html(work2.data.data.maxT + '°');
+								$('#maxH').html(work2.data.data.maxH + '%');
+								$('#minT').html(work2.data.data.minT + '°');
+								$('#minH').html(work2.data.data.minH + '%');
+
+								$('.detail_01 .length_c').css('width', inspectionData.battery + '%');
+								// $('.detail_03 .length_c').css('width',((inspectionData.hight - work2.data.data.minT) / (work2.data.data.maxT - work2.data.data.minT) * 100) + '%');
+								$('.detail_03 .length_c').css('width', inspectionData.hight + '%');
+								$('.detail_03 .length_c2').css('width', inspectionData.highh + '%');
+								$('.detail_04 .length_c').css('width', inspectionData.middlet + '%');
+								// $('.detail_04 .length_c').css('width',((inspectionData.middlet - work2.data.data.minT) / (work2.data.data.maxT - work2.data.data.minT) * 100) + '%');
+								$('.detail_04 .length_c2').css('width', inspectionData.middleh + '%');
+								$('.detail_05 .length_c').css('width', inspectionData.lowt + '%');
+								$('.detail_05 .length_c2').css('width', inspectionData.lowh + '%');
+							}
+						};
+
+						ws.onclose = function (evt) {
+							console.log("Connection closed.");
+							//TODO 尝试断线重连
+							setTimeout(function () {
+								ws = new WebSocket("ws://127.0.0.1:8080/websocket/1");
+							}, 5000);
+						};
 					};
-					
-				});
-			});
+
+                });
+            });
 		</script>
 	</body>
 </html>

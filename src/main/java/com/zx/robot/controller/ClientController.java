@@ -59,12 +59,12 @@ public class ClientController {
         refreshRobotInfoTimer.patrolTime = System.currentTimeMillis();
       //模拟机器人收到客户端通知，开始每3秒上报一次数据到数据库
         new Thread( () -> {
-            for (double j = 0; j < 10; j++){
+            for (double j = 0; j < 100; j++){
                 double i = j + Math.random() * 100;
-                InspectionData inspectionData = new InspectionData(i,i,i,i,i,i,i,i,i,i,i,i,"a_" + i, new Date());
+                InspectionData inspectionData = new InspectionData(i + 50,i,i + 50,i,i + 50,i,i,i,i,i,i,i,"a_" + i, new Date());
                 inspectionDataService.insert(inspectionData);
                 try {
-                    Thread.sleep(3000L);
+                    Thread.sleep(1000L);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
