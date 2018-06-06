@@ -2,23 +2,29 @@ package com.zx.robot.controller;
 
 import com.zx.common.entity.ReturnMsg;
 import com.zx.robot.entity.InspectionData;
+import com.zx.robot.schedule.RefreshRobotInfoTimer;
 import com.zx.robot.service.InspectionDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 
 @RequestMapping("client")
 @Controller
 public class ClientController {
 
+
+    @Autowired
+    private RefreshRobotInfoTimer refreshRobotInfoTimer;
     @Autowired
     private InspectionDataService inspectionDataService;
 
     @RequestMapping("start")
-    public @ResponseBody ReturnMsg start(){
+    public @ResponseBody ReturnMsg start(HttpServletResponse response){
+        response.addHeader("Access-Control-Allow-Origin","*");
 //        try {
 //            // 1.创建 socket 指定服务器地址和端
 //            Socket client = new Socket("127.0.0.1", 8001);
@@ -50,9 +56,11 @@ public class ClientController {
 //            e.printStackTrace();
 //        }
 
+        refreshRobotInfoTimer.patrolTime = System.currentTimeMillis();
       //模拟机器人收到客户端通知，开始每3秒上报一次数据到数据库
         new Thread( () -> {
-            for (double i = 0; i < 20; i++){
+            for (double j = 0; j < 10; j++){
+                double i = j + Math.random() * 100;
                 InspectionData inspectionData = new InspectionData(i,i,i,i,i,i,i,i,i,i,i,i,"a_" + i, new Date());
                 inspectionDataService.insert(inspectionData);
                 try {

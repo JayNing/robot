@@ -2,6 +2,8 @@ package com.zx.robot.mapper;
 
 import com.zx.robot.entity.InspectionData;
 
+import java.util.List;
+
 public interface InspectionDataMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -16,4 +18,6 @@ public interface InspectionDataMapper {
     int updateByPrimaryKey(InspectionData record);
 
     InspectionData selectNewLastUser();
+
+    List<InspectionData> selectByCreateTime(String createTime);
 }

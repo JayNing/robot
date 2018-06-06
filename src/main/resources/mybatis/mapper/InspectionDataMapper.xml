@@ -22,8 +22,15 @@
     id, HighT, HighH, MiddleT, MiddleH, LowT, LowH, ArmT, WindSpeed, RobotX, RobotY, 
     RobotH, Battery, Target, CreateTime
   </sql>
-  <select id="selectNewLastUser" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByCreateTime" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
+    <include refid="Base_Column_List" />
+    from inspection_data
+    where CreateTime >= str_to_date(#{createTime},'%Y-%m-%d %H:%i:%S')
+    order by id desc
+  </select>
+  <select id="selectNewLastUser" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
     <include refid="Base_Column_List" />
     from inspection_data
    order by id desc
