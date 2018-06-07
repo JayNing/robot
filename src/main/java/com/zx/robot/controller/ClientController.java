@@ -31,7 +31,7 @@ public class ClientController {
 //            // 2.客户端向服务器发送登录信息
 //            OutputStream os = client.getOutputStream();// 字节输出流
 //            PrintWriter pw = new PrintWriter(new OutputStreamWriter(os,"UTF-8"),true);
-//            pw.write("用户名: admin;密码：123");
+//            pw.write("start");
 //            pw.flush();
 //            client.shutdownOutput();// 关闭输出流
 //

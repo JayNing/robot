@@ -35,11 +35,11 @@
 		.detail_text >div{position: absolute;width: 150px;}
 		.detail_text >div .iconfont{display: inline-block; width: 25px; text-align: center;}
 		.detail_text .status{width: 50px; display: inline-block; margin: 0 5px; height: 3px; background: #4f72e6; position: relative; bottom: 3px;}
-		.detail_01{ left: 20px; top: 100px;}
+		.detail_01{ left: 20px; top: 80px;}
 		.detail_02{ left: 160px; top: -20px;}
-		.detail_03{ left: 345px; top: 70px;}
-		.detail_04{ left: 345px; top: 160px;}
-		.detail_05{ left: 345px; top: 240px;}
+		.detail_03{ left: 345px; top: 45px;}
+		.detail_04{ left: 345px; top: 145px;}
+		.detail_05{ left: 345px; top: 235px;}
 		.detail_01 >div,.detail_02 >div{display: inline-block;}
 		.electricity{float: right;position: relative;}
 		.electricity .iconfont{font-size: 32px; position: absolute; left: -35px; top: 2px;}
@@ -57,7 +57,23 @@
 		.detail_text .length_c,.detail_text .length_c2{display: inline-block; width: 0%; height: 3px; position: absolute; left: 0; top: 0;}
 		.detail_text .length_c{background: #e63538;}
 		.detail_text .length_c2{background: #66ce66;}
+		.check_btn >div{cursor: pointer;}
 		.opcity_0{opacity: 0;}
+		.detail_01:after{content: ''; display: inline-block; width: 2px; height: 40px; left: 35px; top: 25px; position: absolute;background: #4f72e6;}
+		.detail_02:after{content: ''; display: inline-block; width: 2px; height: 35px; left: 45px; top: 25px; position: absolute;background: #4f72e6;}
+		.detail_03:after{content: ''; display: inline-block; width: 50px; height: 2px; left: -85px; top: 25px; position: absolute;background: #4f72e6;}
+		.detail_03:before{content: 'H'; color: #fff; font-weight: 700; position: absolute; top: 18px; left: -25px;}
+		.detail_04:after{content: ''; display: inline-block; width: 50px; height: 2px; left: -85px; top: 22px; position: absolute;background: #4f72e6;}
+		.detail_04:before{content: 'M'; color: #fff; font-weight: 700; position: absolute;top: 15px; left: -25px;}
+		.detail_05:after{content: ''; display: inline-block; width: 50px; height: 2px; left: -85px; top: 20px; position: absolute;background: #4f72e6;}
+		.detail_05:before{content: 'L'; color: #fff; font-weight: 700; position: absolute;top: 15px; left: -25px;}
+		.date_top{position: absolute; top: 0; left: 100px; width: 250px; font-size: 13px;}
+		.date_top >div{width: 100%;height: 100%}
+		.date_top >div span{display: inline-block; position: relative; bottom: 4px; width: 140px; height: 2px; margin: 0 10px;}
+		.date_top .wendu{}
+		.date_top .wendu span{background-image: linear-gradient(to right,#4f03fc,#00fed0,#39fa04,#ffeb04,#c43118); background-image: -moz-linear-gradient(to right,#4f03fc,#00fed0,#39fa04,#ffeb04,#c43118); background-image: -webkit-linear-gradient(to right,#4f03fc,#00fed0,#39fa04,#ffeb04,#c43118);}
+		.date_top .shidu{position: absolute; top: 0; left: 0;}
+		.date_top .shidu span{ background-image: linear-gradient(to right,#affbda,#6736e5); background-image: -moz-linear-gradient(to right,#affbda,#6736e5); background-image: -webkit-linear-gradient(to right,#affbda,#6736e5);}
 	</style>
 </head>
 	<body>
@@ -66,6 +82,11 @@
 				<div class="t_box_l">
 					<div class="title">
 						监控机房
+						<div class="date_top">
+							<div class="shidu opcity_0">0%<span></span>100%</div>
+							<div class="wendu ">0℃<span></span>80℃</div>
+						</div>
+
 					</div>
 					<div class="add_bx">
 						<div class="add_bx_bj">
@@ -74,8 +95,8 @@
 							<canvas id="myCanvas2" class="myCanvas2" width="500" height="400">为支持Canvas，请更新你的浏览器</canvas>
 						</div>
 						<div class="check_btn">
-							<div class="dis_inline color_1 temperatures"><span class="iconfont icon-thermometer"></span>温度</div>
-							<div class="dis_inline color_2 humidity"><span class="iconfont icon-water-drop"></span>湿度</div>
+							<div class="dis_inline color_2 humidity"><span class="iconfont icon-thermometer"></span>温度</div>
+							<div class="dis_inline color_1 temperatures"><span class="iconfont icon-water-drop"></span>湿度</div>
 						</div>
 					</div>
 				</div>
@@ -130,7 +151,7 @@
 						</div>
 						<div>
 							<div class="color_3" id="minT">60℃</div>
-							<div><span class="iconfont icon-thermometer"></span></div>
+							<div><span class="iconfont icon-thermometer moni4" ></span></div>
 							<div class="color_1" >最低温度</div>
 						</div>
 						<div>
@@ -140,7 +161,7 @@
 						</div>
 						<div>
 							<div class="color_4" id="minH">30%</div>
-							<div><span class="iconfont icon-thermometer"></span></div>
+							<div><span class="iconfont icon-thermometer moni5"></span></div>
 							<div class="color_1 ">最低湿度</div>
 						</div>
 						<div>
@@ -162,13 +183,13 @@
 					<div class="add_select">
 						<div class="add_select_t">
 							<span class="color_1">选择导航点:</span>
-							<select class="color_1 select_chect" name="">
-								<option value="">请选择</option>
-								<option value="">P1</option>
-								<option value="">P2</option>
-								<option value="">P3</option>
-							</select>								
-						</div>
+                            <select class="color_1 select_chect" name="">
+                                <option value="-1">请选择</option>
+                                <option value="">P1</option>
+                                <option value="">P2</option>
+                                <option value="">P3</option>
+                            </select>
+                        </div>
 						<div class="add_btn color_1">
 							开始循检
 						</div>
@@ -178,26 +199,6 @@
 		</div>
 		<script type="text/javascript" src="../js/jquery-1.9.1.min.js" ></script>
 		<script>
-
-			// var showFlag = 't';
-
-            // changeShow(showFlag);
-
-            // function changeShow(type){
-			 //    showFlag = type;
-            //
-			 //    if ('t' == type){
-			 //        $('#classT').attr('class','dis_inline color_2 humidity');
-			 //        $('#classH').attr('class','dis_inline color_1 temperatures');
-			 //        $('#myCanvas').attr("style",{'display':'block'});
-			 //        $('#myCanvas1').attr("style",{'display':'none'});
-				// } else if ('h' == type){
-            //         $('#classT').attr('class','dis_inline color_1 temperatures');
-            //         $('#classH').attr('class','dis_inline color_2 humidity');
-            //         $('#myCanvas').attr("style",{'display':'none'});
-            //         $('#myCanvas').attr("style",{'display':'block'});
-				// }
-            // }
 
 			//模拟温度比例
 			$('.detail_01 .length_c').css('width','40%');
@@ -357,6 +358,16 @@
                     $(this).removeClass('temperatures').siblings().addClass('temperatures');
                     $(this).removeClass('color_1').siblings().addClass('color_1');
                     $('.add_bx_bj canvas').eq(this_index).addClass('opcity_0').siblings().removeClass('opcity_0');
+
+                    $('.date_top >div').eq(this_index).addClass('opcity_0').siblings().removeClass('opcity_0');
+                });
+
+                $('.add_btn').on('click',function(){
+                    var is_select = $('.select_chect').val();
+                    if(is_select == -1){
+                        alert('请选择具体的导航点！')
+                        return false;
+                    };
                 });
 
                 $('.select_chect').change(function(){ //当选择导航点后才可以点击控制按钮
@@ -366,7 +377,6 @@
                             url:"http://127.0.0.1:8080/client/start",
                             success:function(date){
                                 if(date.errorCode == 0){	//errorCode为0时执行	end_onmessage();
-
                                     end_onmessage();
                                     $('.add_btn').unbind();  //解除按钮绑定click事件，防止重复请求
                                 };
@@ -413,10 +423,14 @@
 								$('#windS').html(inspectionData.windspeed + ' M/S');
 								$('#lineT').html(inspectionData.armt + '°');
 
-								$('#maxT').html(work2.data.data.maxT + '°');
-								$('#maxH').html(work2.data.data.maxH + '%');
-								$('#minT').html(work2.data.data.minT + '°');
-								$('#minH').html(work2.data.data.minH + '%');
+                                var maxT = work2.data.data.maxT;
+                                var maxH = work2.data.data.maxH;
+                                var minT = work2.data.data.minT;
+                                var minH = work2.data.data.minH;
+								$('#maxT').html( maxT + '°');
+								$('#maxH').html(maxH + '%');
+								$('#minT').html(minT + '°');
+								$('#minH').html(minH + '%');
 
 								$('.detail_01 .length_c').css('width', inspectionData.battery + '%');
 								// $('.detail_03 .length_c').css('width',((inspectionData.hight - work2.data.data.minT) / (work2.data.data.maxT - work2.data.data.minT) * 100) + '%');
@@ -427,6 +441,13 @@
 								$('.detail_04 .length_c2').css('width', inspectionData.middleh + '%');
 								$('.detail_05 .length_c').css('width', inspectionData.lowt + '%');
 								$('.detail_05 .length_c2').css('width', inspectionData.lowh + '%');
+
+                                $('.moni').css({'background-image':'-webkit-linear-gradient(bottom,#ea66a6,#ea66a6 '+maxT + '%' +'\,\#7e98ea '+(1 - maxT)+ '%' +')','-webkit-background-clip':'text','-webkit-text-fill-color':'transparent'});
+                                $('.moni4').css({'background-image':'-webkit-linear-gradient(bottom,#ea66a6,#ea66a6 '+minT+ '%' +'\,\#7e98ea '+(1 - minT)+ '%' +')','-webkit-background-clip':'text','-webkit-text-fill-color':'transparent'});
+                                $('.moni2').css({'background-image':'-webkit-linear-gradient(bottom,#7bdaba,#7bdaba '+maxH+ '%' +'\,\#7e98ea '+(1-maxH)+ '%' +')','-webkit-background-clip':'text','-webkit-text-fill-color':'transparent'});
+                                $('.moni5').css({'background-image':'-webkit-linear-gradient(bottom,#7bdaba,#7bdaba '+minH+ '%' +'\,\#7e98ea '+(1-minH)+ '%' +')','-webkit-background-clip':'text','-webkit-text-fill-color':'transparent'});
+                                $('.moni3').css({'background-image':'-webkit-linear-gradient(bottom,#ea66a6,#ea66a6 '+inspectionData.armt + '%'+'\,\#7e98ea '+(1 - inspectionData.armt) + '%'+')','-webkit-background-clip':'text','-webkit-text-fill-color':'transparent'})
+                                $('.dianliang').css({'background-image':'-webkit-linear-gradient(left,#7bdaba,#7bdaba '+inspectionData.battery + '%'+'\,\#7e98ea '+inspectionData.battery + '%'+')','-webkit-background-clip':'text','-webkit-text-fill-color':'transparent'})
 							}
 						};
 
