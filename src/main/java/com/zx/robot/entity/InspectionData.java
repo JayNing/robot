@@ -25,6 +25,8 @@ public class InspectionData implements Serializable {
 
     private Double windspeed;
 
+
+
     private Double robotx;
 
     private Double roboty;

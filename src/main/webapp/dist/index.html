@@ -6,13 +6,13 @@
 	<link rel="stylesheet" type="text/css" href="../css/reset.min.css"/>
 	<link rel="stylesheet" href="../css/iconfont.css" />
 	<style>
-		.content{max-width: 1200px; margin: auto;}
+		.content{max-width: 1024px; height: 790px; position: absolute; left: calc(50% - 507px); left: calc(50% - 507px); left: calc(50% - 507px); top: calc(50% - 390px); top: -moz-calc(50% - 390px); top: -webkit-calc(50% - 390px);}
 		.t_box_l{background: #17245c; width: 55%;}
 		.t_box_r{background: #122154; width: 45%;}
-		.t_box_l,.t_box_r{height: 550px; overflow: hidden; position: relative;}
+		.t_box_l,.t_box_r{height: 520px; overflow: hidden; position: relative;}
 		.b_box_l{background: #122154; width: 55%;}
 		.b_box_r{background: #0d1d4b; width: 45%;}
-		.b_box_l,.b_box_r{height: 350px; overflow: hidden; position: relative;}
+		.b_box_l,.b_box_r{height: 260px; overflow: hidden; position: relative;}
 		.color_1{color: #7e98ea;} .color_2{color: #c9d6ff;} .color_3{color: #da4c77;} .color_4{color: #7bdaba;}
 		.lin_height4{line-height: 40px;}
 		.dis_inline{display: inline-block;}
@@ -29,44 +29,44 @@
 		.temperatures .iconfont{font-size: 28px; position: absolute; left: 10px;}
 		.humidity{background: #4f72e6;}
 		.detail{position: relative;}
+		.detail >div:first-child{margin-top: 20px;}
 		.detail img{width: 100%;}
 		.detail .icon-thermometer{font-size: 22px;}
 		.detail_text{font-size: 14px; position: absolute; left: 0; top: 50px; color: #4B6BDA;}
 		.detail_text >div{position: absolute;width: 150px;}
 		.detail_text >div .iconfont{display: inline-block; width: 25px; text-align: center;}
-		.detail_text .status{width: 50px; display: inline-block; margin: 0 5px; height: 3px; background: #4f72e6; position: relative; bottom: 3px;}
-		.detail_01{ left: 20px; top: 80px;}
-		.detail_02{ left: 160px; top: -20px;}
-		.detail_03{ left: 345px; top: 45px;}
-		.detail_04{ left: 345px; top: 145px;}
-		.detail_05{ left: 345px; top: 235px;}
+		.detail_text .status{width: 40px; display: inline-block; margin: 0 3px; height: 3px; background: #4f72e6; position: relative; bottom: 3px;}
+		.detail_01{ left: 15px; top: 65px;}
+		.detail_02{ left: 125px; top: -25px;}
+		.detail_03{ left: 290px; top: 25px;}
+		.detail_04{ left: 290px; top: 115px;}
+		.detail_05{ left: 290px; top: 205px;}
 		.detail_01 >div,.detail_02 >div{display: inline-block;}
 		.electricity{float: right;position: relative;}
 		.electricity .iconfont{font-size: 32px; position: absolute; left: -35px; top: 2px;}
 		.b_box_detail{position: relative;font-size:0; padding-top: 20px;}
-		.b_box_detail >div{display: inline-block;width: 16.66%; font-size: 14px; text-align: center; margin-top: 30px;}
+		.b_box_detail >div{display: inline-block;width: 16.66%; font-size: 14px; text-align: center; margin-top: 25px;}
 		.b_box_detail >div .iconfont{color: #7e98ea; font-size: 46px;}
 		.b_box_detail >div .icon-shuxian1{position: relative; bottom: 5px;}
 		.b_box_detail >div div:nth-child(2){margin-top: 20px;}
 		.b_box_detail >div div:last-child{margin-top: 15px;line-height: 1;}
-		.add_select_t{height: 40px; width: 450px; margin: auto; line-height: 40px; border-bottom: 1px solid #7e98ea;}
-		.select_chect{background: transparent; border: none; width: 350px;}
+		.add_select_t{height: 40px; width: 380px; margin: auto; line-height: 40px; border-bottom: 1px solid #7e98ea;}
+		.select_chect{background: transparent; border: none; width: 290px;}
 		.add_select{padding: 30px;}
 		.add_btn{display: inline-block; width: 200px; margin-left: calc(50% - 100px); margin-left: -moz-calc(50% - 100px); margin-left: 50% - 100px; cursor: pointer; margin-top: 50px; height: 45px; line-height: 45px; text-align: center; background: #1d3d85; border-radius: 4px;}
 		.add_btn:hover{background: #4B6BDA; color: #0D1D4B;}
 		.detail_text .length_c,.detail_text .length_c2{display: inline-block; width: 0%; height: 3px; position: absolute; left: 0; top: 0;}
 		.detail_text .length_c{background: #e63538;}
 		.detail_text .length_c2{background: #66ce66;}
-		.check_btn >div{cursor: pointer;}
 		.opcity_0{opacity: 0;}
-		.detail_01:after{content: ''; display: inline-block; width: 2px; height: 40px; left: 35px; top: 25px; position: absolute;background: #4f72e6;}
+		.detail_01:after{content: ''; display: inline-block; width: 2px; height: 35px; left: 35px; top: 25px; position: absolute;background: #4f72e6;}
 		.detail_02:after{content: ''; display: inline-block; width: 2px; height: 35px; left: 45px; top: 25px; position: absolute;background: #4f72e6;}
-		.detail_03:after{content: ''; display: inline-block; width: 50px; height: 2px; left: -85px; top: 25px; position: absolute;background: #4f72e6;}
-		.detail_03:before{content: 'H'; color: #fff; font-weight: 700; position: absolute; top: 18px; left: -25px;}
-		.detail_04:after{content: ''; display: inline-block; width: 50px; height: 2px; left: -85px; top: 22px; position: absolute;background: #4f72e6;}
-		.detail_04:before{content: 'M'; color: #fff; font-weight: 700; position: absolute;top: 15px; left: -25px;}
-		.detail_05:after{content: ''; display: inline-block; width: 50px; height: 2px; left: -85px; top: 20px; position: absolute;background: #4f72e6;}
-		.detail_05:before{content: 'L'; color: #fff; font-weight: 700; position: absolute;top: 15px; left: -25px;}
+		.detail_03:after{content: ''; display: inline-block; width: 35px; height: 2px; left: -65px; top: 25px; position: absolute;background: #4f72e6;}
+		.detail_03:before{content: 'H'; color: #fff; font-weight: 700; position: absolute; top: 18px; left: -20px;}
+		.detail_04:after{content: ''; display: inline-block; width: 35px; height: 2px; left: -65px; top: 22px; position: absolute;background: #4f72e6;}
+		.detail_04:before{content: 'M'; color: #fff; font-weight: 700; position: absolute;top: 15px; left: -20px;}
+		.detail_05:after{content: ''; display: inline-block; width: 35px; height: 2px; left: -65px; top: 20px; position: absolute;background: #4f72e6;}
+		.detail_05:before{content: 'L'; color: #fff; font-weight: 700; position: absolute;top: 15px; left: -20px;}
 		.date_top{position: absolute; top: 0; left: 100px; width: 250px; font-size: 13px;}
 		.date_top >div{width: 100%;height: 100%}
 		.date_top >div span{display: inline-block; position: relative; bottom: 4px; width: 140px; height: 2px; margin: 0 10px;}
@@ -74,6 +74,7 @@
 		.date_top .wendu span{background-image: linear-gradient(to right,#4f03fc,#00fed0,#39fa04,#ffeb04,#c43118); background-image: -moz-linear-gradient(to right,#4f03fc,#00fed0,#39fa04,#ffeb04,#c43118); background-image: -webkit-linear-gradient(to right,#4f03fc,#00fed0,#39fa04,#ffeb04,#c43118);}
 		.date_top .shidu{position: absolute; top: 0; left: 0;}
 		.date_top .shidu span{ background-image: linear-gradient(to right,#affbda,#6736e5); background-image: -moz-linear-gradient(to right,#affbda,#6736e5); background-image: -webkit-linear-gradient(to right,#affbda,#6736e5);}
+		.check_btn >div{cursor: pointer;}
 	</style>
 </head>
 	<body>
@@ -102,7 +103,7 @@
 				</div>
 				<div class="t_box_r">
 					<div class="title">
-						机器人实时状态
+						机房实时状态
 						<div class="electricity"><span class="iconfont icon-dianchi dianliang"></span><div id="battery">50%</div></div>
 					</div>
 					<div class="detail">
@@ -185,7 +186,7 @@
 							<span class="color_1" id="targetStr">导航点:</span>
                         </div>
 						<div class="add_btn color_1">
-							开始循检
+							开始巡检
 						</div>
 					</div>
 				</div>
