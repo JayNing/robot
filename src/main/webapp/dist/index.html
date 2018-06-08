@@ -6,20 +6,23 @@
 	<link rel="stylesheet" type="text/css" href="../css/reset.min.css"/>
 	<link rel="stylesheet" href="../css/iconfont.css" />
 	<style>
-		.content{max-width: 1024px; height: 790px; position: absolute; left: calc(50% - 507px); left: calc(50% - 507px); left: calc(50% - 507px); top: calc(50% - 390px); top: -moz-calc(50% - 390px); top: -webkit-calc(50% - 390px);}
+		.content{max-width: 1024px; height: 100%; max-height: 800px; margin: auto; width: 100%;
+			/*position: absolute; left: calc(50% - 502px); left: calc(50% - 502px); left: calc(50% - 502px);*/
+			/*top: calc(50% - 370px); top: -moz-calc(50% - 370px); top: -webkit-calc(50% - 370px);*/
+		}
 		.t_box_l{background: #17245c; width: 55%;}
 		.t_box_r{background: #122154; width: 45%;}
 		.t_box_l,.t_box_r{height: 520px; overflow: hidden; position: relative;}
 		.b_box_l{background: #122154; width: 55%;}
 		.b_box_r{background: #0d1d4b; width: 45%;}
-		.b_box_l,.b_box_r{height: 260px; overflow: hidden; position: relative;}
+		.b_box_l,.b_box_r{height: 248px; overflow: hidden; position: relative;}
 		.color_1{color: #7e98ea;} .color_2{color: #c9d6ff;} .color_3{color: #da4c77;} .color_4{color: #7bdaba;}
 		.lin_height4{line-height: 40px;}
 		.dis_inline{display: inline-block;}
 		.content .title{color: #7e98ea; position: relative; line-height: 30px; height: 30px;}
 		.content .title:before{content: ''; display: inline-block; width: 10px; height: 10px; margin-right: 5px; border-radius: 10px; background: #4b6bda;}
 		.t_box,.b_box{font-size: 0;}
-		.t_box >div,.b_box >div{display: inline-block;font-size: 14px; box-sizing: border-box; padding: 20px;}
+		.t_box >div,.b_box >div{display: inline-block;font-size: 14px; box-sizing: border-box; padding: 20px 20px 10px 20px;}
 		.add_bx_bj img{width: 100%;}
 		.add_bx{text-align: center;}
 		.add_bx .add_bx_bj{position: relative;}
@@ -44,15 +47,15 @@
 		.detail_01 >div,.detail_02 >div{display: inline-block;}
 		.electricity{float: right;position: relative;}
 		.electricity .iconfont{font-size: 32px; position: absolute; left: -35px; top: 2px;}
-		.b_box_detail{position: relative;font-size:0; padding-top: 20px;}
-		.b_box_detail >div{display: inline-block;width: 16.66%; font-size: 14px; text-align: center; margin-top: 25px;}
+		.b_box_detail{position: relative;font-size:0; padding-top: 10px;}
+		.b_box_detail >div{display: inline-block;width: 16.66%; font-size: 14px; text-align: center; margin-top: 20px;}
 		.b_box_detail >div .iconfont{color: #7e98ea; font-size: 46px;}
 		.b_box_detail >div .icon-shuxian1{position: relative; bottom: 5px;}
 		.b_box_detail >div div:nth-child(2){margin-top: 20px;}
 		.b_box_detail >div div:last-child{margin-top: 15px;line-height: 1;}
 		.add_select_t{height: 40px; width: 380px; margin: auto; line-height: 40px; border-bottom: 1px solid #7e98ea;}
 		.select_chect{background: transparent; border: none; width: 290px;}
-		.add_select{padding: 30px;}
+		.add_select{padding: 20px;}
 		.add_btn{display: inline-block; width: 200px; margin-left: calc(50% - 100px); margin-left: -moz-calc(50% - 100px); margin-left: 50% - 100px; cursor: pointer; margin-top: 50px; height: 45px; line-height: 45px; text-align: center; background: #1d3d85; border-radius: 4px;}
 		.add_btn:hover{background: #4B6BDA; color: #0D1D4B;}
 		.detail_text .length_c,.detail_text .length_c2{display: inline-block; width: 0%; height: 3px; position: absolute; left: 0; top: 0;}
