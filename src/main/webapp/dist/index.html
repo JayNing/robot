@@ -182,13 +182,7 @@
 					</div>
 					<div class="add_select">
 						<div class="add_select_t">
-							<span class="color_1">选择导航点:</span>
-                            <select class="color_1 select_chect" name="">
-                                <option value="-1">请选择</option>
-                                <option value="">P1</option>
-                                <option value="">P2</option>
-                                <option value="">P3</option>
-                            </select>
+							<span class="color_1" id="targetStr">导航点:</span>
                         </div>
 						<div class="add_btn color_1">
 							开始循检
@@ -362,105 +356,95 @@
                     $('.date_top >div').eq(this_index).addClass('opcity_0').siblings().removeClass('opcity_0');
                 });
 
-                $('.add_btn').on('click',function(){
-                    var is_select = $('.select_chect').val();
-                    if(is_select == -1){
-                        alert('请选择具体的导航点！')
-                        return false;
-                    };
-                });
-
-                $('.select_chect').change(function(){ //当选择导航点后才可以点击控制按钮
-                    $('.add_btn').on('click',function(){ //点击开始巡检按钮发送指令
-                        $.ajax({
-                            type:"get",
-                            url:"http://127.0.0.1:8080/client/start",
-                            success:function(date){
-                                if(date.errorCode == 0){	//errorCode为0时执行	end_onmessage();
-                                    end_onmessage();
-                                    $('.add_btn').unbind();  //解除按钮绑定click事件，防止重复请求
-                                };
-                            }
-                        });
+                $('.add_btn').on('click',function(){ //点击开始巡检按钮发送指令
+                    $.ajax({
+                        type:"get",
+                        url:"http://127.0.0.1:8080/client/start",
+                        success:function(date){
+                            if(date.errorCode == 0){	//errorCode为0时执行	end_onmessage();
+                                end_onmessage();
+                                $('.add_btn').unbind();  //解除按钮绑定click事件，防止重复请求
+                            };
+                        }
                     });
+                });
 
-                    var date = {
-                        "direction": "cToS",
-                        "requestMethod": "pong",
-                        "responseType": "",
-                        "data": "",
-                        "time": 1111
+                var date = {
+                    "direction": "cToS",
+                    "requestMethod": "pong",
+                    "responseType": "",
+                    "data": "",
+                    "time": 1111
+                };
+
+                function end_onmessage() {
+                    var ws = new WebSocket("ws://127.0.0.1:8080/websocket/1");
+
+                    ws.onopen = function (evt) {
+                        console.log("Connection open ...");
+                    };
+                    ws.onmessage = function (evt) {
+                        var responseData = evt.data;
+                        var work2 = JSON.parse(responseData);
+                        var responseType = work2.responseType;
+                        if (responseType == 'ping') {
+                            ws.send(JSON.stringify(date));
+                        } else {
+                            console.log(work2.data.data);
+                            var inspectionData = work2.data.data.inspectionData;
+                            console.log(inspectionData);
+                            map.moveTo(inspectionData.robotx, inspectionData.roboty, inspectionData.highh);
+                            map2.moveTo(inspectionData.robotx, inspectionData.roboty, inspectionData.hight);
+
+                            $('#battery').html(inspectionData.battery + '%');
+                            $('#armT').html(inspectionData.armt + '°');
+                            $('#windSpeed').html(inspectionData.windspeed + ' M/S');
+                            $('#hight').text(inspectionData.hight + '°');
+                            $('#highh').text(inspectionData.highh + '%');
+                            $('#middlet').text(inspectionData.middlet + '°');
+                            $('#middleh').text(inspectionData.middleh + '%');
+                            $('#lowt').text(inspectionData.lowt + '°');
+                            $('#lowh').text(inspectionData.lowh + '%');
+                            $('#windS').html(inspectionData.windspeed + ' M/S');
+                            $('#lineT').html(inspectionData.armt + '°');
+                            $('#targetStr').text("导航点:" + inspectionData.target);
+
+                            var maxT = work2.data.data.maxT;
+                            var maxH = work2.data.data.maxH;
+                            var minT = work2.data.data.minT;
+                            var minH = work2.data.data.minH;
+                            $('#maxT').html( maxT + '°');
+                            $('#maxH').html(maxH + '%');
+                            $('#minT').html(minT + '°');
+                            $('#minH').html(minH + '%');
+
+                            $('.detail_01 .length_c').css('width', inspectionData.battery + '%');
+                            // $('.detail_03 .length_c').css('width',((inspectionData.hight - work2.data.data.minT) / (work2.data.data.maxT - work2.data.data.minT) * 100) + '%');
+                            $('.detail_03 .length_c').css('width', inspectionData.hight + '%');
+                            $('.detail_03 .length_c2').css('width', inspectionData.highh + '%');
+                            $('.detail_04 .length_c').css('width', inspectionData.middlet + '%');
+                            // $('.detail_04 .length_c').css('width',((inspectionData.middlet - work2.data.data.minT) / (work2.data.data.maxT - work2.data.data.minT) * 100) + '%');
+                            $('.detail_04 .length_c2').css('width', inspectionData.middleh + '%');
+                            $('.detail_05 .length_c').css('width', inspectionData.lowt + '%');
+                            $('.detail_05 .length_c2').css('width', inspectionData.lowh + '%');
+
+                            $('.moni').css({'background-image':'-webkit-linear-gradient(bottom,#ea66a6,#ea66a6 '+maxT + '%' +'\,\#7e98ea '+(1 - maxT)+ '%' +')','-webkit-background-clip':'text','-webkit-text-fill-color':'transparent'});
+                            $('.moni4').css({'background-image':'-webkit-linear-gradient(bottom,#ea66a6,#ea66a6 '+minT+ '%' +'\,\#7e98ea '+(1 - minT)+ '%' +')','-webkit-background-clip':'text','-webkit-text-fill-color':'transparent'});
+                            $('.moni2').css({'background-image':'-webkit-linear-gradient(bottom,#7bdaba,#7bdaba '+maxH+ '%' +'\,\#7e98ea '+(1-maxH)+ '%' +')','-webkit-background-clip':'text','-webkit-text-fill-color':'transparent'});
+                            $('.moni5').css({'background-image':'-webkit-linear-gradient(bottom,#7bdaba,#7bdaba '+minH+ '%' +'\,\#7e98ea '+(1-minH)+ '%' +')','-webkit-background-clip':'text','-webkit-text-fill-color':'transparent'});
+                            $('.moni3').css({'background-image':'-webkit-linear-gradient(bottom,#ea66a6,#ea66a6 '+inspectionData.armt + '%'+'\,\#7e98ea '+(1 - inspectionData.armt) + '%'+')','-webkit-background-clip':'text','-webkit-text-fill-color':'transparent'})
+                            $('.dianliang').css({'background-image':'-webkit-linear-gradient(left,#7bdaba,#7bdaba '+inspectionData.battery + '%'+'\,\#7e98ea '+inspectionData.battery + '%'+')','-webkit-background-clip':'text','-webkit-text-fill-color':'transparent'})
+                        }
                     };
 
-					function end_onmessage() {
-						var ws = new WebSocket("ws://127.0.0.1:8080/websocket/1");
-
-						ws.onopen = function (evt) {
-							console.log("Connection open ...");
-						};
-						ws.onmessage = function (evt) {
-							var responseData = evt.data;
-							var work2 = JSON.parse(responseData);
-							var responseType = work2.responseType;
-							if (responseType == 'ping') {
-								ws.send(JSON.stringify(date));
-							} else {
-								console.log(work2.data.data);
-								var inspectionData = work2.data.data.inspectionData;
-								console.log(inspectionData);
-								map.moveTo(inspectionData.robotx, inspectionData.roboty, inspectionData.highh);
-								map2.moveTo(inspectionData.robotx, inspectionData.roboty, inspectionData.hight);
-
-								$('#battery').html(inspectionData.battery + '%');
-								$('#armT').html(inspectionData.armt + '°');
-								$('#windSpeed').html(inspectionData.windspeed + ' M/S');
-								$('#hight').text(inspectionData.hight + '°');
-								$('#highh').text(inspectionData.highh + '%');
-								$('#middlet').text(inspectionData.middlet + '°');
-								$('#middleh').text(inspectionData.middleh + '%');
-								$('#lowt').text(inspectionData.lowt + '°');
-								$('#lowh').text(inspectionData.lowh + '%');
-								$('#windS').html(inspectionData.windspeed + ' M/S');
-								$('#lineT').html(inspectionData.armt + '°');
-
-                                var maxT = work2.data.data.maxT;
-                                var maxH = work2.data.data.maxH;
-                                var minT = work2.data.data.minT;
-                                var minH = work2.data.data.minH;
-								$('#maxT').html( maxT + '°');
-								$('#maxH').html(maxH + '%');
-								$('#minT').html(minT + '°');
-								$('#minH').html(minH + '%');
-
-								$('.detail_01 .length_c').css('width', inspectionData.battery + '%');
-								// $('.detail_03 .length_c').css('width',((inspectionData.hight - work2.data.data.minT) / (work2.data.data.maxT - work2.data.data.minT) * 100) + '%');
-								$('.detail_03 .length_c').css('width', inspectionData.hight + '%');
-								$('.detail_03 .length_c2').css('width', inspectionData.highh + '%');
-								$('.detail_04 .length_c').css('width', inspectionData.middlet + '%');
-								// $('.detail_04 .length_c').css('width',((inspectionData.middlet - work2.data.data.minT) / (work2.data.data.maxT - work2.data.data.minT) * 100) + '%');
-								$('.detail_04 .length_c2').css('width', inspectionData.middleh + '%');
-								$('.detail_05 .length_c').css('width', inspectionData.lowt + '%');
-								$('.detail_05 .length_c2').css('width', inspectionData.lowh + '%');
-
-                                $('.moni').css({'background-image':'-webkit-linear-gradient(bottom,#ea66a6,#ea66a6 '+maxT + '%' +'\,\#7e98ea '+(1 - maxT)+ '%' +')','-webkit-background-clip':'text','-webkit-text-fill-color':'transparent'});
-                                $('.moni4').css({'background-image':'-webkit-linear-gradient(bottom,#ea66a6,#ea66a6 '+minT+ '%' +'\,\#7e98ea '+(1 - minT)+ '%' +')','-webkit-background-clip':'text','-webkit-text-fill-color':'transparent'});
-                                $('.moni2').css({'background-image':'-webkit-linear-gradient(bottom,#7bdaba,#7bdaba '+maxH+ '%' +'\,\#7e98ea '+(1-maxH)+ '%' +')','-webkit-background-clip':'text','-webkit-text-fill-color':'transparent'});
-                                $('.moni5').css({'background-image':'-webkit-linear-gradient(bottom,#7bdaba,#7bdaba '+minH+ '%' +'\,\#7e98ea '+(1-minH)+ '%' +')','-webkit-background-clip':'text','-webkit-text-fill-color':'transparent'});
-                                $('.moni3').css({'background-image':'-webkit-linear-gradient(bottom,#ea66a6,#ea66a6 '+inspectionData.armt + '%'+'\,\#7e98ea '+(1 - inspectionData.armt) + '%'+')','-webkit-background-clip':'text','-webkit-text-fill-color':'transparent'})
-                                $('.dianliang').css({'background-image':'-webkit-linear-gradient(left,#7bdaba,#7bdaba '+inspectionData.battery + '%'+'\,\#7e98ea '+inspectionData.battery + '%'+')','-webkit-background-clip':'text','-webkit-text-fill-color':'transparent'})
-							}
-						};
-
-						ws.onclose = function (evt) {
-							console.log("Connection closed.");
-							//TODO 尝试断线重连
-							setTimeout(function () {
-								ws = new WebSocket("ws://127.0.0.1:8080/websocket/1");
-							}, 5000);
-						};
-					};
-
-                });
+                    ws.onclose = function (evt) {
+                        console.log("Connection closed.");
+                        //TODO 尝试断线重连
+                        setTimeout(function () {
+                            ws = new WebSocket("ws://127.0.0.1:8080/websocket/1");
+                        }, 5000);
+                    };
+                };
             });
 		</script>
 	</body>
