@@ -21,7 +21,6 @@ import java.util.List;
 
 /**
  * @author ning
- * 创建于 2017年10月19日下午3:31:25
  * //TODO json工具类
  */
 public class JsonUtil {
