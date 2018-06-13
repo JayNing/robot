@@ -16,7 +16,6 @@
     <mvc:annotation-driven />
     <!-- 自动扫描controller包下的所有类，如果@Controller注入为bean,功能只是用来扫描controller层的 -->  
     <context:component-scan base-package="com.zx.robot.controller" />
-    
       <aop:aspectj-autoproxy proxy-target-class="true" />
   
     <!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->  
