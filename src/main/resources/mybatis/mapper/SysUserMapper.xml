@@ -9,6 +9,18 @@
   <sql id="Base_Column_List" >
     ID, USERNAME, PASSWORD
   </sql>
+  <update id="renameTable" parameterType="java.lang.String">
+      rename table sys_user to ${tableName };
+  </update>
+  <update id="createTable">
+    CREATE TABLE sys_user (
+        ID INT(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+        USERNAME VARCHAR(64) NOT NULL DEFAULT '',
+        PASSWORD VARCHAR(32) NOT NULL DEFAULT '',
+        PRIMARY KEY(ID),
+        KEY I_SYS_USER_USERNAME (USERNAME)
+    )ENGINE=INNODB DEFAULT CHARSET=UTF8 COMMENT='用户表';
+  </update>
   <select id="selectAllUser" resultMap="BaseResultMap" >
     select 
     <include refid="Base_Column_List" />

@@ -7,4 +7,6 @@ import java.util.List;
 public interface SysUserService {
 
     List<SysUser> selectAllUser();
+
+    void updateUserInfoTimer();
 }

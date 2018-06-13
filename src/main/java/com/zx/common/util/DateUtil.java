@@ -2,6 +2,7 @@ package com.zx.common.util;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -34,8 +35,17 @@ public class DateUtil {
         return format;
     }
 
+    public static String getBeforeDateString(){
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR, -1);
+        Date time = calendar.getTime();
+        return formatDate(time,FORMAT_DATE_HOUR);
+    }
+
     public static void main(String[] args){
-        String formatDate = formatDate(new Date(), null);
-        System.out.println(formatDate);
+//        String formatDate = formatDate(new Date(), null);
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR, -1);
+        System.out.println(calendar.getTime());
     }
 }
