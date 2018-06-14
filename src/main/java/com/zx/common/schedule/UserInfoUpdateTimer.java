@@ -17,8 +17,8 @@ public class UserInfoUpdateTimer {
     @Autowired
     private SysUserService sysUserService;
 
-//    @Scheduled(cron = "0 0 0 * * ? ")
-    @Scheduled(fixedDelay = 60 * 1000 * 3, initialDelay = 1000 * 10)
+//    @Scheduled(fixedDelay = 60 * 1000 * 3, initialDelay = 1000 * 10)
+    @Scheduled(cron = "0 0 0 * * ? ")
     public void userInfoUpdateTimer() {
         logger.info("userInfoUpdateTimer is called...... " + LocalDateTime.now());
         sysUserService.updateUserInfoTimer();

@@ -6,8 +6,9 @@
 
   <groupId>com.zx</groupId>
   <artifactId>robot</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <packaging>war</packaging>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <!--<version>1.0.0-RELEASES</version> -->
 
   <name>robot Maven Webapp</name>
   <!-- FIXME change it to the project's website -->
@@ -38,7 +39,7 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-test</artifactId>
-      <version>4.1.4.RELEASE</version>
+      <version>4.3.4.RELEASE</version>
       <scope>test</scope>
     </dependency>
     <!-- druid -->
@@ -286,8 +287,71 @@
 
   </dependencies>
 
+
+  <repositories>
+    <repository>
+      <id>maven-public</id>
+      <name>maven-public</name>
+      <url>http://192.168.0.210:8081/repository/maven-public/</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+    </repository>
+  </repositories>
+
+  <!--
+      Snapshot包的管理
+      1）修改Maven的settings.xml文件，加入认证机制
+      <servers>
+          <server>
+              <id>nexus</id>
+              <username>admin</username>
+              <password>admin123</password>
+         </server>
+      </servers>
+      2）修改工程的Pom文件,添加下方distributionManagement内容
+        注意：snapshotRepository中的id的名字nexus要跟maven/conf/settings.xml文件中的名字一定要对应上
+      3）上传到Nexus上
+          1-项目编译成的jar是Snapshot(POM文件的头部)
+            <groupId>com.woasis</groupId>
+            <artifactId>test-nexus</artifactId>
+            <version>1.0.0-<span style="color: #ff0000;">SHAPSHOT</span></version>
+            <packaging>jar</packaging>
+         2-使用mvn deploy命令运行即可（运行结果在此略过）
+         3-因为Snapshot是快照版本，默认他每次会把Jar加一个时间戳，做为历史备份版本。
+    -->
+  <distributionManagement>
+    <snapshotRepository>
+      <id>nexus</id>
+      <name>Nexus Snapshot</name>
+      <url>http://192.168.0.210:8081/repository/maven-snapshots/</url>
+      <uniqueVersion>false</uniqueVersion>
+    </snapshotRepository>
+    <site>
+      <id>nexus</id>
+      <name>Nexus Sites</name>
+      <url>dav:http://192.168.0.210:8081/repository/maven-snapshots/</url>
+    </site>
+    <!--
+          Releases包的管理
+      1）与Snapshot大同小异，只是上传到私服上的Jar包不会自动带时间戳
+      2）与Snapshot配置不同的地方，就是工程的PMO文件，额外加入repository配置
+      3）打包的时候需要把Snapshot去掉，可以换成RELEASES
+ -->
+    <repository>
+      <id>nexus</id>
+      <name>Nexus Snapshot</name>
+      <url>http://192.168.0.210:8081/repository/maven-releases/</url>
+      <uniqueVersion>false</uniqueVersion>
+    </repository>
+  </distributionManagement>
+
+
   <build>
-    <finalName>robot</finalName>
+    <finalName>robot-1.0.0-SNAPSHOT</finalName>
 
     <resources>
     <!-- 这里的resource配置的是需要导入到项目的资源文件夹 -->
@@ -300,12 +364,34 @@
       </resource>
     </resources>
     <plugins>
+      <!-- 编译install -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
           <source>1.8</source>
           <target>1.8</target>
+          <encoding>UTF-8</encoding>
+        </configuration>
+      </plugin>
+      <!-- 打jar包 -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+          <classesDirectory>target/classes/</classesDirectory>
+          <archive>
+            <manifest>
+              <mainClass>com.alibaba.dubbo.container.Main</mainClass>
+              <!-- 打包时 MANIFEST.MF文件不记录的时间戳版本，但是无法做到发布到nexus时，也不带时间戳 -->
+              <useUniqueVersions>false</useUniqueVersions>
+              <addClasspath>true</addClasspath>
+              <classpathPrefix>lib/</classpathPrefix>
+            </manifest>
+            <manifestEntries>
+              <Class-Path>.</Class-Path>
+            </manifestEntries>
+          </archive>
         </configuration>
       </plugin>
     </plugins>
