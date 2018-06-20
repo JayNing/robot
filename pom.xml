@@ -6,8 +6,9 @@
 
   <groupId>com.zx</groupId>
   <artifactId>robot</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
-  <packaging>jar</packaging>
+  <version>1.0.0-RELEASES</version>
+  <packaging>war</packaging>
+  <!--<packaging>war</packaging>  当packaging为war时，mvn install打包编译时，会加入resource里的文件一同编译打包；如果packaging为jar，则只打包编辑classes里的东西-->
   <!--<version>1.0.0-RELEASES</version> -->
 
   <name>robot Maven Webapp</name>
@@ -277,6 +278,12 @@
                <groupId>org.springframework.data</groupId>
                <artifactId>spring-data-redis</artifactId>
                <version>1.8.1.RELEASE</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.session</groupId>
+      <artifactId>spring-session-data-redis</artifactId>
+      <version>1.2.1.RELEASE</version>
     </dependency>
 
     <dependency>

@@ -364,7 +364,7 @@
                 $('.add_btn').on('click',function(){ //点击开始巡检按钮发送指令
                     $.ajax({
                         type:"get",
-                        url:"http://192.168.0.210:8080/client/start",
+                        url:"http://192.168.0.211:8080/client/start",
                         success:function(date){
                             if(date.errorCode == 0){	//errorCode为0时执行	end_onmessage();
                                 end_onmessage();
@@ -383,7 +383,7 @@
                 };
 
                 function end_onmessage() {
-                    var ws = new WebSocket("ws://192.168.0.210:8080/websocket/1");
+                    var ws = new WebSocket("ws://192.168.0.211:8080/websocket/1");
 
                     ws.onopen = function (evt) {
                         console.log("Connection open ...");
@@ -446,7 +446,7 @@
                         console.log("Connection closed.");
                         //TODO 尝试断线重连
                         setTimeout(function () {
-                            ws = new WebSocket("ws://192.168.0.210:8080/websocket/1");
+                            ws = new WebSocket("ws://192.168.0.211:8080/websocket/1");
                         }, 5000);
                     };
                 };
