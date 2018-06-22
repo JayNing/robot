@@ -5,6 +5,7 @@
     <param-name>contextConfigLocation</param-name>
     <param-value>classpath:spring/spring-context.xml</param-value>
   </context-param>
+  <!-- springSessionRepositoryFilter为配置redis共享缓存，必需放在第一个 -->
   <filter>
     <filter-name>springSessionRepositoryFilter</filter-name>
     <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
